@@ -1,0 +1,6 @@
+@AcmeCorpShopperCartsRestApi_HostAddress = http://localhost:5104
+
+GET {{AcmeCorpShopperCartsRestApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

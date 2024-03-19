@@ -1,0 +1,107 @@
+﻿@model AcmeCorpShopperUIWebApp.Models.Cart
+
+@{
+	ViewData["Title"] = "Cart";
+}
+
+<h1>Cart Details</h1>
+@if (Model != null)
+{
+
+}
+<p>Cart ID: @Model.CartId</p>
+<p>Cart Price: @Model.CartPrice</p>
+
+<h2>Cart Items</h2>
+@if (Model.CartItems != null && Model.CartItems.Any())
+{
+			<table>
+				<thead>
+					<tr>
+						<th>Cart Item ID</th>
+						<th>Product ID</th>
+						<th>Cart ID</th>
+						<th>Remove Product</th>
+					</tr>
+				</thead>
+				<tbody>
+			@foreach (var cartItem in Model.CartItems)
+			{
+								<tr>
+									<td>@cartItem.CartItemId</td>
+									<td>@cartItem.ProductId</td>
+									<td>@cartItem.FkCartId</td>
+									<td>
+											@* <a asp-controller="AcmeCorpShopper" asp-action="DeleteProductFromCart" asp-route-cartId="@cartItem.FkCartId" asp-route-productId="@cartItem.ProductId">Remove</a>	 *@									
+
+												@* JavaScript method cause form only allow Get and Post by default *@
+												<form id="removeProductForm_@cartItem.CartItemId" asp-controller="AcmeCorpShopper" asp-action="DeleteProductFromCart" method="post">
+													<input type="hidden" name="cartId" value="@cartItem.FkCartId" />
+													<input type="hidden" name="productId" value="@cartItem.ProductId" />
+													<button type="button" onclick="removeProduct(@cartItem.CartItemId)"> Remove </button>
+												</form>
+									</td>
+								</tr>
+			}
+				</tbody>
+			</table>
+}
+else
+{
+			<p>No items in the cart.</p>
+}
+
+<form id="clearCartForm" asp-controller="AcmeCorpShopper" asp-action="ClearCart" method="post">
+	<input type="hidden" id="cartId" name="cartId" value="@Model.CartId" />
+	<button type="button" onclick="clearCart()">Clear Cart</button>
+</form>
+
+<script>
+	function removeProduct(cartItemId) {
+		if (confirm("Are you sure you want to remove this product from the cart?")) {
+			var form = document.getElementById("removeProductForm_" + cartItemId);
+			var formData = new FormData(form);
+
+			fetch(form.action, {
+				method: 'DELETE',
+				body: formData
+			})
+			.then(response => {
+				if (!response.ok) {
+					throw new Error('Failed to remove product from cart');
+				}
+				// Reload the page
+				location.reload();
+			})
+			.catch(error => {
+				console.error('Error:', error);
+				// Optionally show an error message to the user
+			});
+		}
+	}
+</script>
+
+<script>
+	function clearCart() {
+		if (confirm("Are you sure you want to clear the cart?")) {
+			var form = document.getElementById("clearCartForm");
+			var formData = new FormData(form);
+
+			fetch(form.action, {
+				method: 'DELETE',
+				body: formData
+			})
+			.then(response => {
+				if (!response.ok) {
+					throw new Error('Failed to clear the cart');
+				}
+				// Optionally handle successful clearing (e.g., update UI)
+				location.reload(); // Reload the page after successful clearing
+			})
+			.catch(error => {
+				console.error('Error:', error);
+				// Optionally show an error message to the user
+			});
+		}
+	}
+</script>

@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\AcmeCorpShopperUIWebApp.props" />
+</Project>
