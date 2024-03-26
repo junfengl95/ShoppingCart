@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "s+0TFqj3HNIa1c3DEoXbEv7t5mfNf/+YI4U4Wa6cvcI=",
+  "Source": "AcmeCorpShopperOrdersRestApi",
+  "BasePath": "_content/AcmeCorpShopperOrdersRestApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

@@ -1,6 +1,6 @@
 ﻿using AcmeCorpShopperUIWebApp.ApiClient;
 using AcmeCorpShopperUIWebApp.Models;
-using AcmeCorpShopperUIWebApp.ModelView;
+using AcmeCorpShopperUIWebApp.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AcmeCorpShopperUIWebApp.Controllers
@@ -92,71 +92,7 @@ namespace AcmeCorpShopperUIWebApp.Controllers
 			}
 		}
 
-		//[HttpGet]
-		//public async Task<IActionResult> Cart()
-		//{
-		//    // Retrieve the cartId from the cookie
-		//    int? cartId = int.TryParse(HttpContext.Request.Cookies["CartId"], out int parsedCartId) ? parsedCartId : null;
 
-		//    // Check if the cartId is null or not
-		//    if (cartId != null)
-		//    {
-		//        // Retrieve the cart from the client API
-		//        Cart? cart = await _acmeCorpClient.RetrieveCartAsync((int)cartId);
-
-		//        // If the cart exists, return the view with the cart model
-		//        if (cart != null)
-		//        {
-		//            List<CartItem> cartItems = new List<CartItem>();
-		//            foreach (var item in cart.CartItems)
-		//            {
-		//                cartItems.Add(item);
-		//            }
-
-		//            //Map cart items to view Model
-		//            List<CartItemDetails> cartItemDetailsList = cartItems.Select(ci => new CartItemDetails
-		//            {
-		//                CartItemId = ci.CartItemId,
-		//                ProductId = ci.ProductId,
-		//                ProductName = ci.Product.ProductName,
-		//                ProductPrice = ci.Product.ProductPrice
-		//            }).ToList();
-
-		//            CartItemViewModel viewModel = new CartItemViewModel
-		//            {
-		//                CartId = cart.CartId,
-		//                CartPrice = cart.CartPrice,
-		//                CartItems = cartItemDetailsList
-		//            };
-
-		//            return View(viewModel);
-		//        }
-		//        else
-		//        {
-		//            // Clear the invalid cartId cookie and create a new cart
-		//            ClearAndCreateNewCart();
-		//        }
-		//    }
-		//    else
-		//    {
-		//        // If the cartId cookie is not set, create a new cart
-		//        ClearAndCreateNewCart();
-		//    }
-
-		//    return View();
-		//}
-
-		//private async Task ClearAndCreateNewCart()
-		//{
-		//    // Clear the cartId cookie
-		//    Response.Cookies.Delete("CartId");
-
-		//    // Create a new cart
-		//    Cart? cart = await _acmeCorpClient.CreateNewCart();
-
-		//    // Set the CartId cookie with the ID of the new cart
-		//    Response.Cookies.Append("CartId", cart.CartId.ToString());
-		//}
 
 		[HttpPost]
 		public async Task<IActionResult> AddProductToCart(int cartId, int productId)
@@ -171,7 +107,7 @@ namespace AcmeCorpShopperUIWebApp.Controllers
 		{
 			await _acmeCorpClient.DeleteProductFromCartAsync(cartId, productId);
 
-			//await Console.Out.WriteLineAsync($"product: {productId} deleted from cart: {cartId}");
+			await Console.Out.WriteLineAsync($"product: {productId} deleted from cart: {cartId}");
 
 			return RedirectToAction("Cart", "AcmeCorpShopper");
 		}
@@ -184,7 +120,73 @@ namespace AcmeCorpShopperUIWebApp.Controllers
 			return RedirectToAction(nameof(Cart));
 		}
 
+		[HttpPost]
+		public IActionResult BeforeCreation()
+		{
+			return View();
+		}
 
+		[HttpPost]
+		public async Task<IActionResult> CreateOrder([Bind("CustomerName")] Order order)
+		{
+			try
+			{
+				// Check if CustomerName is null or empty
+				if (string.IsNullOrEmpty(order.CustomerName))
+				{
+					ModelState.AddModelError(nameof(order.CustomerName), "Customer name is required.");
+					return View(order); // Return to the same view with error messages
+				}
+
+				// Fetch the cartId from the cookie
+				int.TryParse(HttpContext.Request.Cookies["CartId"], out int cartId);
+
+				// Prepare the order object
+				order.CartId = cartId;
+
+				// Call the client method to create a new order
+				var createdOrder = await _acmeCorpClient.CreateNewOrder(order);
+
+				if (createdOrder != null && createdOrder.OrderId != 0)
+				{
+					Console.WriteLine($"Order created for customer: {order.CustomerName}, CartId: {cartId}");
+
+					// Redirect to the OrderDetails action with the newly created order's ID
+					return RedirectToAction("OrderDetails", new { orderId = createdOrder.OrderId });
+				}
+				else
+				{
+					// Handle case where order creation failed
+					Console.WriteLine($"Failed to create order for customer: {order.CustomerName}, CartId: {cartId}");
+					ModelState.AddModelError(string.Empty, "Failed to create order. Please try again later.");
+					return View(order); // Return to the same view with error messages
+				}
+			}
+			catch (Exception ex)
+			{
+				// Log any exceptions that occur during order creation
+				Console.WriteLine($"An error occurred while creating the order: {ex.Message}");
+				ModelState.AddModelError(string.Empty, "An error occurred while creating the order. Please try again later.");
+				return View(order); // Return to the same view with error messages
+			}
+		}
+
+
+
+		[HttpGet]
+		public async Task<IActionResult> OrderDetails(int orderId)
+		{
+			// Fetch order details from the backend using orderId
+			Order? order = await _acmeCorpClient.GetOrderByIdAsync(orderId);
+
+			if (order == null)
+			{
+				// If order is not found, return a 404 Not Found status
+				return NotFound();
+			}
+
+			return View(order);
+		}
 
 		public IActionResult CheckForCookies()
 		{

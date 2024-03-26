@@ -1,0 +1,18 @@
+﻿@model AcmeCorpShopperUIWebApp.Models.Order;
+@{
+	ViewData["Title"] = "OrderDetails";
+}
+
+<h1>Order Details</h1>
+
+@if (object.ReferenceEquals(Model, null))
+{
+		<p>Order empty in CreateOrder</p>
+}
+
+else
+{
+		<p>OrderId: @Model.OrderId</p>
+		<p>CartId: @Model.CartId</p>
+		<p>CustomerName: @Model.CustomerName</p>
+}

@@ -151,6 +151,22 @@
   },
   {
     "ContainingType": "AcmeCorpShopperCartsRestApi.Controllers.CartController",
+    "Method": "CheckoutCart",
+    "RelativePath": "api/Cart/checkout/{cartId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cartId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AcmeCorpShopperCartsRestApi.Controllers.CartController",
     "Method": "RemoveAllProductInCart",
     "RelativePath": "api/Cart/clear-items/{cartId}",
     "HttpMethod": "DELETE",

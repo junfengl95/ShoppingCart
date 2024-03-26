@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AcmeCorpShopperProductsRestApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8fdc4ba00876c5a4c2a651580efd785f449a336c")]
 [assembly: System.Reflection.AssemblyProductAttribute("AcmeCorpShopperProductsRestApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AcmeCorpShopperProductsRestApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

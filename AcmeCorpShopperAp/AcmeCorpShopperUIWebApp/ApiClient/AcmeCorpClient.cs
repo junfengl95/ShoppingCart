@@ -1,6 +1,4 @@
 ﻿using AcmeCorpShopperUIWebApp.Models;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 
 namespace AcmeCorpShopperUIWebApp.ApiClient
@@ -174,7 +172,7 @@ namespace AcmeCorpShopperUIWebApp.ApiClient
 
 		public async Task DeleteProductFromCartAsync(int cartId, int productId)
 		{
-            var client = _httpClientFactory.CreateClient("AcmeCorpCartApiClient");
+			var client = _httpClientFactory.CreateClient("AcmeCorpCartApiClient");
 			var response = await client.DeleteAsync($"api/Cart/{cartId}/remove-product/{productId}");
 
 		}
@@ -184,6 +182,91 @@ namespace AcmeCorpShopperUIWebApp.ApiClient
 			var client = _httpClientFactory.CreateClient("AcmeCorpCartApiClient");
 			var response = await client.DeleteAsync($"api/Cart/clear-items/{cartId}");
 
+		}
+
+		public async Task<Order> CreateNewOrder(Order order)
+		{
+			var client = _httpClientFactory.CreateClient("AcmeCorpOrderApiClient");
+			var jsonOrder = JsonSerializer.Serialize(order, typeof(Order));
+			StringContent content = new StringContent(jsonOrder, System.Text.Encoding.UTF8, "application/json");
+			HttpResponseMessage response = await client.PostAsync("api/Order", content);
+
+			if (response.IsSuccessStatusCode)
+			{
+				var responseBody = await response.Content.ReadAsStreamAsync();
+				//Deserialize the response body into Cart object
+				var createdOrder = await JsonSerializer.DeserializeAsync<Order>(responseBody);
+
+				await Console.Out.WriteLineAsync($"order id: {createdOrder.OrderId}, with customerName: {createdOrder.CustomerName} for cartID {createdOrder.CartId}");
+
+				return createdOrder;
+			}
+			else
+			{
+				await Console.Out.WriteLineAsync($"Fail to create order");
+				return null;
+			}
+		}
+
+		// Hardcoded Order Endpoint works
+		//public async Task<Order> CreateNewOrder(Order order)
+		//{
+		//	try
+		//	{
+		//		var client = _httpClientFactory.CreateClient("AcmeCorpOrderApiClient");
+
+		//		// Hardcoded JSON string for testing
+		//		string hardcodedJsonOrder = "{ \"customerName\": \"TestCustomer2\", \"cartId\": 116}";
+
+		//		// Create StringContent from the hardcoded JSON
+		//		StringContent content = new StringContent(hardcodedJsonOrder, System.Text.Encoding.UTF8, "application/json");
+
+		//		HttpResponseMessage response = await client.PostAsync("api/Order", content);
+
+		//		if (response.IsSuccessStatusCode)
+		//		{
+		//			var responseBody = await response.Content.ReadAsStringAsync();
+		//			var createdOrder = JsonSerializer.Deserialize<Order>(responseBody);
+		//			return createdOrder;
+		//		}
+		//		else
+		//		{
+		//			// Handle the case where order creation failed
+		//			throw new Exception($"Failed to create order. Status code: {response.StatusCode}");
+		//		}
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		// Log or handle the exception
+		//		Console.WriteLine($"An error occurred while creating the order: {ex.Message}");
+		//		throw;
+		//	}
+		//}
+
+		public async Task<Order?> GetOrderByIdAsync(int id)
+		{
+			var client = _httpClientFactory.CreateClient("AcmeCorpOrderApiClient");
+			HttpResponseMessage response = await client.GetAsync($"/api/Order/{id}");
+			if (response.IsSuccessStatusCode)
+			{
+				var responseBody = await response.Content.ReadAsStreamAsync();
+				return await JsonSerializer.DeserializeAsync<Order>(responseBody);
+			}
+
+			return null;
+		}
+
+		public async Task<Cart?> GetCartById(int cartId)
+		{
+			var client = _httpClientFactory.CreateClient("AcmeCorpCartApiClient");
+			HttpResponseMessage response = await client.GetAsync($"/api/Cart/{cartId}");
+			if (response.IsSuccessStatusCode)
+			{
+				var responseBody = await response.Content.ReadAsStreamAsync();
+				return await JsonSerializer.DeserializeAsync<Cart>(responseBody);
+			}
+
+			return null;
 		}
 	}
 }

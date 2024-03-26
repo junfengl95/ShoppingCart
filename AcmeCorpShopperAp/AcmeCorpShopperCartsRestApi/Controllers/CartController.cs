@@ -213,5 +213,27 @@ namespace AcmeCorpShopperCartsRestApi.Controllers
 
 			return this.Ok();
 		}
+
+		[HttpGet("checkout/{cartId}")]
+		public async Task<ActionResult> CheckoutCart(int cartId)
+		{
+            var foundCartwithItems = await _context.Carts
+                                                   .Include(cart => cart.CartItems)
+                                                   .FirstOrDefaultAsync(cart => cart.CartId == cartId);
+
+            if (!object.Equals(foundCartwithItems, null))
+            {
+                foundCartwithItems.CartItems.Clear();
+                foundCartwithItems.CartPrice = await CalculateTotalCartPrice(cartId);
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                return this.NotFound();
+            }
+
+            return this.Ok();
+
+        }
 	}
 }

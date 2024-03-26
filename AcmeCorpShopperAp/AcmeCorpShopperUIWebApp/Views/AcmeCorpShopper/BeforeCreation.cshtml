@@ -1,0 +1,13 @@
+﻿@model AcmeCorpShopperUIWebApp.Models.Order;
+
+@{
+	ViewData["Title"] = "BeforeCreate";
+}
+
+
+<form asp-controller="AcmeCorpShopper" asp-action="CreateOrder" method="post" >
+	<label for="customerName">CustomerName:</label>
+	<input type="text" name="CustomerName" required />
+	<input type="hidden"  name="cartId" value="@ViewBag.CartId" />
+	<button type="submit">Place Order</button>
+</form>

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "gHDfdKPE4CpJg7fAZyTZtr46Z35prJRPhOiOhSnwFYzVMr5oVhcGoCuEDFGjhgM/rQg+7sRvG7AM1fGg6AKU5Q==",
+  "dgSpecHash": "XjCNueyoBXEXw+DaI7J0qP0988aeo+r0ByUe/F0yCnphRk+XRtsUUg/uC1OuHp4Xfu5c/5g0zzPyMzzCthRYAg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\T-22-NET-01\\VisualStudioWorkspace\\REST Architecture\\Assessment\\AcmeCorpShopperAp\\AcmeCorpShopperUIWebApp\\AcmeCorpShopperUIWebApp.csproj",
+  "projectFilePath": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\GitProject\\AcmeCorpShopperAp\\AcmeCorpShopperUIWebApp\\AcmeCorpShopperUIWebApp.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

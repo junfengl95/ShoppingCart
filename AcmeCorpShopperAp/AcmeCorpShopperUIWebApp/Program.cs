@@ -34,6 +34,15 @@ builder.Services.AddHttpClient("AcmeCorpCartApiClient", // Name of client
 		httpClient.BaseAddress = new Uri("https://localhost:7146");
 	});
 
+builder.Services.AddHttpClient("AcmeCorpOrderApiClient", // Name of client 
+    httpClient =>
+    {
+        httpClient.DefaultRequestHeaders
+                  .Accept
+                  .Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+        httpClient.BaseAddress = new Uri("https://localhost:7167");
+    });
+
 builder.Services.AddScoped<IAcmeCorpClient, AcmeCorpClient>();
 
 builder.Services.AddCors(c =>

@@ -5,10 +5,7 @@
 }
 
 <h1>Cart Details</h1>
-@if (Model != null)
-{
 
-}
 <p>Cart ID: @Model.CartId</p>
 <p>Cart Price: @Model.CartPrice</p>
 
@@ -51,10 +48,25 @@ else
 			<p>No items in the cart.</p>
 }
 
-<form id="clearCartForm" asp-controller="AcmeCorpShopper" asp-action="ClearCart" method="post">
+<form id="clearCartForm" asp-controller="AcmeCorpShopper" asp-action="ClearCart" asp-route-cartId="@Model.CartId" method="post">
 	<input type="hidden" id="cartId" name="cartId" value="@Model.CartId" />
 	<button type="button" onclick="clearCart()">Clear Cart</button>
 </form>
+<br />
+<a asp-controller="AcmeCorpShopper" asp-action="AllProducts"> AllProducts</a>
+
+<hr />
+
+<h2>Checkout</h2>
+
+<form asp-controller="AcmeCorpShopper" asp-action="BeforeCreation" method="post" >
+@* 	<label for="customerName">CustomerName:</label>
+	<input type="text" name="customerName" required />
+	<input type="hidden"  name="cartId" value="@Model.CartId" /> *@
+	<button type="submit">Place Order</button>
+</form>
+
+
 
 <script>
 	function removeProduct(cartItemId) {

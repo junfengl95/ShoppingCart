@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\T-22-NET-01\\VisualStudioWorkspace\\REST Architecture\\Assessment\\AcmeCorpShopperAp\\AcmeCorpShopperUIWebApp\\AcmeCorpShopperUIWebApp.csproj",
+      "projectUniqueName": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\GitProject\\AcmeCorpShopperAp\\AcmeCorpShopperUIWebApp\\AcmeCorpShopperUIWebApp.csproj",
       "projectName": "AcmeCorpShopperUIWebApp",
-      "projectPath": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\T-22-NET-01\\VisualStudioWorkspace\\REST Architecture\\Assessment\\AcmeCorpShopperAp\\AcmeCorpShopperUIWebApp\\AcmeCorpShopperUIWebApp.csproj",
+      "projectPath": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\GitProject\\AcmeCorpShopperAp\\AcmeCorpShopperUIWebApp\\AcmeCorpShopperUIWebApp.csproj",
       "packagesPath": "C:\\Users\\junfe\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\T-22-NET-01\\VisualStudioWorkspace\\REST Architecture\\Assessment\\AcmeCorpShopperAp\\AcmeCorpShopperUIWebApp\\obj\\",
+      "outputPath": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\GitProject\\AcmeCorpShopperAp\\AcmeCorpShopperUIWebApp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

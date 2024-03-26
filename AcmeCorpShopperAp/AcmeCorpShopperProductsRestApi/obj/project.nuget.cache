@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "/OPuirRUYynH1BvB4jzHbFpjQI7BGmQFjITBb4HSHMbzG9jf3vrVHTesDg0zRl8CrGgUg+bMO0MZYAj80S5Stw==",
+  "dgSpecHash": "fz3W+Rk+LIy5aBgMYHC3fa+/ll93B9jZCX+C8TXLnMSIjj1kcZSbSpiPaQ/lckVdWDJ9IqMs+OudxJvvQEU8Dg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\T-22-NET-01\\VisualStudioWorkspace\\REST Architecture\\Assessment\\AcmeCorpShopperAp\\AcmeCorpShopperProductsRestApi\\AcmeCorpShopperProductsRestApi.csproj",
+  "projectFilePath": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\GitProject\\AcmeCorpShopperAp\\AcmeCorpShopperProductsRestApi\\AcmeCorpShopperProductsRestApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\junfe\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\junfe\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
