@@ -152,7 +152,7 @@ namespace AcmeCorpShopperUIWebApp.Controllers
 					Console.WriteLine($"Order created for customer: {order.CustomerName}, CartId: {cartId}");
 
 					// Redirect to the OrderDetails action with the newly created order's ID
-					return RedirectToAction("OrderDetails", new { orderId = createdOrder.OrderId });
+					return RedirectToAction("OrderDetails", new { orderId = createdOrder.OrderId }); //replaced createdOrder with orderView
 				}
 				else
 				{
@@ -185,7 +185,19 @@ namespace AcmeCorpShopperUIWebApp.Controllers
 				return NotFound();
 			}
 
-			return View(order);
+			Cart foundCart = await _acmeCorpClient.GetCartById(order.CartId);
+
+			var orderView = new OrderViewModel()
+			{
+				OrderId = order.OrderId,
+				CustomerName = order.CustomerName,
+				CartId = order.CartId,
+				TotalPrice = foundCart.CartPrice,
+				CartItems = foundCart.CartItems
+			};
+
+
+			return View(orderView);
 		}
 
 		public IActionResult CheckForCookies()

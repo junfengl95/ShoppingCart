@@ -3,28 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\GitProject\\AcmeCorpShopperAp\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FFFB7ED3-4998-410B-8B6E-D17B9EDF7EC7}|AcmeCorpShopperUIWebApp\\AcmeCorpShopperUIWebApp.csproj|c:\\users\\junfe\\onedrive\\desktop\\.net course\\gitproject\\acmecorpshopperap\\acmecorpshopperuiwebapp\\controllers\\acmecorpshoppercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FFFB7ED3-4998-410B-8B6E-D17B9EDF7EC7}|AcmeCorpShopperUIWebApp\\AcmeCorpShopperUIWebApp.csproj|solutionrelative:acmecorpshopperuiwebapp\\controllers\\acmecorpshoppercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FFFB7ED3-4998-410B-8B6E-D17B9EDF7EC7}|AcmeCorpShopperUIWebApp\\AcmeCorpShopperUIWebApp.csproj|c:\\users\\junfe\\onedrive\\desktop\\.net course\\gitproject\\acmecorpshopperap\\acmecorpshopperuiwebapp\\apiclient\\acmecorpclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FFFB7ED3-4998-410B-8B6E-D17B9EDF7EC7}|AcmeCorpShopperUIWebApp\\AcmeCorpShopperUIWebApp.csproj|solutionrelative:acmecorpshopperuiwebapp\\apiclient\\acmecorpclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FFFB7ED3-4998-410B-8B6E-D17B9EDF7EC7}|AcmeCorpShopperUIWebApp\\AcmeCorpShopperUIWebApp.csproj|c:\\users\\junfe\\onedrive\\desktop\\.net course\\gitproject\\acmecorpshopperap\\acmecorpshopperuiwebapp\\views\\acmecorpshopper\\createorder.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{FFFB7ED3-4998-410B-8B6E-D17B9EDF7EC7}|AcmeCorpShopperUIWebApp\\AcmeCorpShopperUIWebApp.csproj|solutionrelative:acmecorpshopperuiwebapp\\views\\acmecorpshopper\\createorder.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FFFB7ED3-4998-410B-8B6E-D17B9EDF7EC7}|AcmeCorpShopperUIWebApp\\AcmeCorpShopperUIWebApp.csproj|c:\\users\\junfe\\onedrive\\desktop\\.net course\\gitproject\\acmecorpshopperap\\acmecorpshopperuiwebapp\\models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FFFB7ED3-4998-410B-8B6E-D17B9EDF7EC7}|AcmeCorpShopperUIWebApp\\AcmeCorpShopperUIWebApp.csproj|solutionrelative:acmecorpshopperuiwebapp\\models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FFFB7ED3-4998-410B-8B6E-D17B9EDF7EC7}|AcmeCorpShopperUIWebApp\\AcmeCorpShopperUIWebApp.csproj|c:\\users\\junfe\\onedrive\\desktop\\.net course\\gitproject\\acmecorpshopperap\\acmecorpshopperuiwebapp\\views\\acmecorpshopper\\orderdetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{FFFB7ED3-4998-410B-8B6E-D17B9EDF7EC7}|AcmeCorpShopperUIWebApp\\AcmeCorpShopperUIWebApp.csproj|solutionrelative:acmecorpshopperuiwebapp\\views\\acmecorpshopper\\orderdetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{FFFB7ED3-4998-410B-8B6E-D17B9EDF7EC7}|AcmeCorpShopperUIWebApp\\AcmeCorpShopperUIWebApp.csproj|c:\\users\\junfe\\onedrive\\desktop\\.net course\\gitproject\\acmecorpshopperap\\acmecorpshopperuiwebapp\\views\\acmecorpshopper\\beforecreation.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{FFFB7ED3-4998-410B-8B6E-D17B9EDF7EC7}|AcmeCorpShopperUIWebApp\\AcmeCorpShopperUIWebApp.csproj|solutionrelative:acmecorpshopperuiwebapp\\views\\acmecorpshopper\\beforecreation.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{06AC324F-784D-4139-9842-738FDB4A9A2F}|AcmeCorpShopperOrdersRestApi\\AcmeCorpShopperOrdersRestApi.csproj|c:\\users\\junfe\\onedrive\\desktop\\.net course\\gitproject\\acmecorpshopperap\\acmecorpshopperordersrestapi\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{06AC324F-784D-4139-9842-738FDB4A9A2F}|AcmeCorpShopperOrdersRestApi\\AcmeCorpShopperOrdersRestApi.csproj|solutionrelative:acmecorpshopperordersrestapi\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FFFB7ED3-4998-410B-8B6E-D17B9EDF7EC7}|AcmeCorpShopperUIWebApp\\AcmeCorpShopperUIWebApp.csproj|c:\\users\\junfe\\onedrive\\desktop\\.net course\\gitproject\\acmecorpshopperap\\acmecorpshopperuiwebapp\\controllers\\acmecorpshoppercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FFFB7ED3-4998-410B-8B6E-D17B9EDF7EC7}|AcmeCorpShopperUIWebApp\\AcmeCorpShopperUIWebApp.csproj|solutionrelative:acmecorpshopperuiwebapp\\controllers\\acmecorpshoppercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FFFB7ED3-4998-410B-8B6E-D17B9EDF7EC7}|AcmeCorpShopperUIWebApp\\AcmeCorpShopperUIWebApp.csproj|c:\\users\\junfe\\onedrive\\desktop\\.net course\\gitproject\\acmecorpshopperap\\acmecorpshopperuiwebapp\\views\\acmecorpshopper\\allproducts.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{FFFB7ED3-4998-410B-8B6E-D17B9EDF7EC7}|AcmeCorpShopperUIWebApp\\AcmeCorpShopperUIWebApp.csproj|solutionrelative:acmecorpshopperuiwebapp\\views\\acmecorpshopper\\allproducts.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 337,
-          "SelectedChildIndex": 11,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
@@ -66,81 +58,52 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "OrderController.cs",
-              "DocumentMoniker": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\GitProject\\AcmeCorpShopperAp\\AcmeCorpShopperOrdersRestApi\\Controllers\\OrderController.cs",
-              "RelativeDocumentMoniker": "AcmeCorpShopperOrdersRestApi\\Controllers\\OrderController.cs",
-              "ToolTip": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\GitProject\\AcmeCorpShopperAp\\AcmeCorpShopperOrdersRestApi\\Controllers\\OrderController.cs",
-              "RelativeToolTip": "AcmeCorpShopperOrdersRestApi\\Controllers\\OrderController.cs",
-              "ViewState": "AQIAAAsAAAAAAAAAAAAAwBoAAABFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-25T13:05:58.382Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Order.cs",
-              "DocumentMoniker": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\GitProject\\AcmeCorpShopperAp\\AcmeCorpShopperUIWebApp\\Models\\Order.cs",
-              "RelativeDocumentMoniker": "AcmeCorpShopperUIWebApp\\Models\\Order.cs",
-              "ToolTip": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\GitProject\\AcmeCorpShopperAp\\AcmeCorpShopperUIWebApp\\Models\\Order.cs",
-              "RelativeToolTip": "AcmeCorpShopperUIWebApp\\Models\\Order.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAcAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-25T13:00:22.853Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "CreateOrder.cshtml",
-              "DocumentMoniker": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\GitProject\\AcmeCorpShopperAp\\AcmeCorpShopperUIWebApp\\Views\\AcmeCorpShopper\\CreateOrder.cshtml",
-              "RelativeDocumentMoniker": "AcmeCorpShopperUIWebApp\\Views\\AcmeCorpShopper\\CreateOrder.cshtml",
-              "ToolTip": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\GitProject\\AcmeCorpShopperAp\\AcmeCorpShopperUIWebApp\\Views\\AcmeCorpShopper\\CreateOrder.cshtml",
-              "RelativeToolTip": "AcmeCorpShopperUIWebApp\\Views\\AcmeCorpShopper\\CreateOrder.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAWAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-03-25T12:34:54.089Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "AcmeCorpClient.cs",
-              "DocumentMoniker": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\GitProject\\AcmeCorpShopperAp\\AcmeCorpShopperUIWebApp\\ApiClient\\AcmeCorpClient.cs",
-              "RelativeDocumentMoniker": "AcmeCorpShopperUIWebApp\\ApiClient\\AcmeCorpClient.cs",
-              "ToolTip": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\GitProject\\AcmeCorpShopperAp\\AcmeCorpShopperUIWebApp\\ApiClient\\AcmeCorpClient.cs",
-              "RelativeToolTip": "AcmeCorpShopperUIWebApp\\ApiClient\\AcmeCorpClient.cs",
-              "ViewState": "AQIAAKwAAAAAAAAAAAA+wLkAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-25T12:31:16.851Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "AcmeCorpShopperController.cs",
-              "DocumentMoniker": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\GitProject\\AcmeCorpShopperAp\\AcmeCorpShopperUIWebApp\\Controllers\\AcmeCorpShopperController.cs",
-              "RelativeDocumentMoniker": "AcmeCorpShopperUIWebApp\\Controllers\\AcmeCorpShopperController.cs",
-              "ToolTip": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\GitProject\\AcmeCorpShopperAp\\AcmeCorpShopperUIWebApp\\Controllers\\AcmeCorpShopperController.cs",
-              "RelativeToolTip": "AcmeCorpShopperUIWebApp\\Controllers\\AcmeCorpShopperController.cs",
-              "ViewState": "AQIAAIsAAAAAAAAAAAAswJ4AAAAtAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-25T11:57:57.651Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
               "Title": "BeforeCreation.cshtml",
               "DocumentMoniker": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\GitProject\\AcmeCorpShopperAp\\AcmeCorpShopperUIWebApp\\Views\\AcmeCorpShopper\\BeforeCreation.cshtml",
               "RelativeDocumentMoniker": "AcmeCorpShopperUIWebApp\\Views\\AcmeCorpShopper\\BeforeCreation.cshtml",
               "ToolTip": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\GitProject\\AcmeCorpShopperAp\\AcmeCorpShopperUIWebApp\\Views\\AcmeCorpShopper\\BeforeCreation.cshtml",
               "RelativeToolTip": "AcmeCorpShopperUIWebApp\\Views\\AcmeCorpShopper\\BeforeCreation.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAqAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAArAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-03-25T12:03:42.083Z",
+              "WhenOpened": "2024-03-27T01:20:19.033Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "OrderDetails.cshtml",
+              "DocumentMoniker": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\GitProject\\AcmeCorpShopperAp\\AcmeCorpShopperUIWebApp\\Views\\AcmeCorpShopper\\OrderDetails.cshtml",
+              "RelativeDocumentMoniker": "AcmeCorpShopperUIWebApp\\Views\\AcmeCorpShopper\\OrderDetails.cshtml",
+              "ToolTip": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\GitProject\\AcmeCorpShopperAp\\AcmeCorpShopperUIWebApp\\Views\\AcmeCorpShopper\\OrderDetails.cshtml",
+              "RelativeToolTip": "AcmeCorpShopperUIWebApp\\Views\\AcmeCorpShopper\\OrderDetails.cshtml",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAAABgAAAACAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-03-27T01:19:51.576Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AcmeCorpShopperController.cs",
+              "DocumentMoniker": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\GitProject\\AcmeCorpShopperAp\\AcmeCorpShopperUIWebApp\\Controllers\\AcmeCorpShopperController.cs",
+              "RelativeDocumentMoniker": "AcmeCorpShopperUIWebApp\\Controllers\\AcmeCorpShopperController.cs",
+              "ToolTip": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\GitProject\\AcmeCorpShopperAp\\AcmeCorpShopperUIWebApp\\Controllers\\AcmeCorpShopperController.cs",
+              "RelativeToolTip": "AcmeCorpShopperUIWebApp\\Controllers\\AcmeCorpShopperController.cs",
+              "ViewState": "AQIAAI4AAAAAAAAAAAAswJoAAAAtAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-25T11:57:57.651Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AllProducts.cshtml",
+              "DocumentMoniker": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\GitProject\\AcmeCorpShopperAp\\AcmeCorpShopperUIWebApp\\Views\\AcmeCorpShopper\\AllProducts.cshtml",
+              "RelativeDocumentMoniker": "AcmeCorpShopperUIWebApp\\Views\\AcmeCorpShopper\\AllProducts.cshtml",
+              "ToolTip": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\GitProject\\AcmeCorpShopperAp\\AcmeCorpShopperUIWebApp\\Views\\AcmeCorpShopper\\AllProducts.cshtml",
+              "RelativeToolTip": "AcmeCorpShopperUIWebApp\\Views\\AcmeCorpShopper\\AllProducts.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAABqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-03-27T01:08:05.711Z"
             }
           ]
         }
