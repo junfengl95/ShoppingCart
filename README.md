@@ -5,7 +5,7 @@ The project was created using .NET version 7 on the Microsoft Visual Studios 202
 The project consists of three components
 1. Products REST API
 2. Carts REST API
-3. Order REST API
+3. Orders REST API
 4. Shopper UI Client
 
 ## Products REST API
@@ -18,7 +18,7 @@ The database will contain two tables
 - Carts
 - CartItems
 
-## Order REST API
+## Orders REST API
 This API provide services of Order resources that will persist to a Sql Server Database named Orders
 
 ## Shopper UI Client
