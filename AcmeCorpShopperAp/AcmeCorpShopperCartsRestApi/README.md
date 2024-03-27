@@ -1,4 +1,4 @@
-# Cart REST API
+# Carts REST API
 
 The API will be calling the endpoints from the Product REST API to populate the Cart entities.
 
