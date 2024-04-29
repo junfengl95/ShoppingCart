@@ -1,0 +1,28 @@
+﻿@model List<ShopperUI.Models.Product>;
+
+@{
+	ViewData["Title"] = "AllProducts";
+}
+
+<form method="get" action="@Url.Action("AllProducts", "Product")">
+	<input type="text" name="searchString" placeholder="Search products..." />
+	<button type="submit">Search</button>
+</form>
+<hr />
+<br />
+
+@foreach (var product in Model)
+{
+	<p>Product Id: @product.ProductId</p>
+	<p>Product Name: @product.ProductName</p>
+	<p>Product Price: @product.ProductPrice</p>
+	<p>Product Rating: @product.ProductRating</p>
+	<br />
+
+	@* 
+	Same result as below just more strongly typed version	
+	@Html.ActionLink("Details", "OneProduct", "Product", new { id = @product.ProductId }, null) *@
+
+	<a class="button" asp-controller="Product" asp-action="OneProduct" asp-route-id="@product.ProductId">Details</a>
+	<hr />
+}

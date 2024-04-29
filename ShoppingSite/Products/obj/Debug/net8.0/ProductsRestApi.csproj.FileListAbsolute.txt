@@ -1,0 +1,7 @@
+C:\Users\junfe\OneDrive\Desktop\.NET Course\ShoppingSite\ShoppingSite\Products\obj\Debug\net8.0\ProductsRestApi.csproj.AssemblyReference.cache
+C:\Users\junfe\OneDrive\Desktop\.NET Course\ShoppingSite\ShoppingSite\Products\obj\Debug\net8.0\ProductsRestApi.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\junfe\OneDrive\Desktop\.NET Course\ShoppingSite\ShoppingSite\Products\obj\Debug\net8.0\ProductsRestApi.AssemblyInfoInputs.cache
+C:\Users\junfe\OneDrive\Desktop\.NET Course\ShoppingSite\ShoppingSite\Products\obj\Debug\net8.0\ProductsRestApi.AssemblyInfo.cs
+C:\Users\junfe\OneDrive\Desktop\.NET Course\ShoppingSite\ShoppingSite\Products\obj\Debug\net8.0\ProductsRestApi.csproj.CoreCompileInputs.cache
+C:\Users\junfe\OneDrive\Desktop\.NET Course\ShoppingSite\ShoppingSite\Products\obj\Debug\net8.0\ProductsRestApi.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\junfe\OneDrive\Desktop\.NET Course\ShoppingSite\ShoppingSite\Products\obj\Debug\net8.0\ProductsRestApi.MvcApplicationPartsAssemblyInfo.cache

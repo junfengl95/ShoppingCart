@@ -1,0 +1,120 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\ShoppingSite\\ShoppingSite\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{0C5304C9-2F92-4EE8-9314-1468FD01A93A}|OrdersApi\\OrdersApi.csproj|c:\\users\\junfe\\onedrive\\desktop\\.net course\\shoppingsite\\shoppingsite\\ordersapi\\apiclient\\cartclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0C5304C9-2F92-4EE8-9314-1468FD01A93A}|OrdersApi\\OrdersApi.csproj|solutionrelative:ordersapi\\apiclient\\cartclient.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0C5304C9-2F92-4EE8-9314-1468FD01A93A}|OrdersApi\\OrdersApi.csproj|c:\\users\\junfe\\onedrive\\desktop\\.net course\\shoppingsite\\shoppingsite\\ordersapi\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0C5304C9-2F92-4EE8-9314-1468FD01A93A}|OrdersApi\\OrdersApi.csproj|solutionrelative:ordersapi\\controllers\\ordercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0C5304C9-2F92-4EE8-9314-1468FD01A93A}|OrdersApi\\OrdersApi.csproj|c:\\users\\junfe\\onedrive\\desktop\\.net course\\shoppingsite\\shoppingsite\\ordersapi\\models\\orderscontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0C5304C9-2F92-4EE8-9314-1468FD01A93A}|OrdersApi\\OrdersApi.csproj|solutionrelative:ordersapi\\models\\orderscontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0C5304C9-2F92-4EE8-9314-1468FD01A93A}|OrdersApi\\OrdersApi.csproj|c:\\users\\junfe\\onedrive\\desktop\\.net course\\shoppingsite\\shoppingsite\\ordersapi\\models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0C5304C9-2F92-4EE8-9314-1468FD01A93A}|OrdersApi\\OrdersApi.csproj|solutionrelative:ordersapi\\models\\order.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 223,
+          "SelectedChildIndex": 8,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{004be353-6879-467c-9d1e-9ac23cdf6d49}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{74946827-37a0-11d2-a273-00c04f8ef4ff}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{a80febb4-e7e0-4147-b476-21aaf2453969}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CartClient.cs",
+              "DocumentMoniker": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\ShoppingSite\\ShoppingSite\\OrdersApi\\ApiClient\\CartClient.cs",
+              "RelativeDocumentMoniker": "OrdersApi\\ApiClient\\CartClient.cs",
+              "ToolTip": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\ShoppingSite\\ShoppingSite\\OrdersApi\\ApiClient\\CartClient.cs",
+              "RelativeToolTip": "OrdersApi\\ApiClient\\CartClient.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAIwA0AAAACAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-29T12:09:37.369Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Order.cs",
+              "DocumentMoniker": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\ShoppingSite\\ShoppingSite\\OrdersApi\\Models\\Order.cs",
+              "RelativeDocumentMoniker": "OrdersApi\\Models\\Order.cs",
+              "ToolTip": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\ShoppingSite\\ShoppingSite\\OrdersApi\\Models\\Order.cs",
+              "RelativeToolTip": "OrdersApi\\Models\\Order.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-29T12:06:22.137Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "OrdersContext.cs",
+              "DocumentMoniker": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\ShoppingSite\\ShoppingSite\\OrdersApi\\Models\\OrdersContext.cs",
+              "RelativeDocumentMoniker": "OrdersApi\\Models\\OrdersContext.cs",
+              "ToolTip": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\ShoppingSite\\ShoppingSite\\OrdersApi\\Models\\OrdersContext.cs",
+              "RelativeToolTip": "OrdersApi\\Models\\OrdersContext.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAHAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-29T12:06:15.47Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "OrderController.cs",
+              "DocumentMoniker": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\ShoppingSite\\ShoppingSite\\OrdersApi\\Controllers\\OrderController.cs",
+              "RelativeDocumentMoniker": "OrdersApi\\Controllers\\OrderController.cs",
+              "ToolTip": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\ShoppingSite\\ShoppingSite\\OrdersApi\\Controllers\\OrderController.cs",
+              "RelativeToolTip": "OrdersApi\\Controllers\\OrderController.cs",
+              "ViewState": "AQIAAAQAAAAAAAAAAAAUwBsAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-29T12:05:51.114Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

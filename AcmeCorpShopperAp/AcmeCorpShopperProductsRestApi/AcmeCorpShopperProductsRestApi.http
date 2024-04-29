@@ -1,6 +1,0 @@
-@AcmeCorpShopperProductsRestApi_HostAddress = http://localhost:5230
-
-GET {{AcmeCorpShopperProductsRestApi_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

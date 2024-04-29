@@ -1,0 +1,53 @@
+﻿@model ShopperUI.Models.Cart;
+
+@{
+	ViewData["Title"] = "Cart";
+}
+
+<h1>Cart Details</h1>
+
+<p>Cart ID: @Model.CartId</p>
+<p>Cart Price: @Model.CartPrice</p>
+
+<h2>Cart Items</h2>
+@if (Model.CartItems != null && Model.CartItems.Any())
+{
+	<table>
+		<thead>
+			<tr>
+				<th>Cart Item ID</th>
+				<th>Product ID</th>
+				<th>Cart ID</th>
+				<th>Remove Product</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var cartItem in Model.CartItems)
+			{
+				<tr>
+					<td>@cartItem.CartItemId</td>
+					<td>@cartItem.ProductId</td>
+					<td>@cartItem.FkCartId</td>
+					<td>
+						<form asp-controller="Cart" asp-action="DeleteProductFromCart" method="post">
+							<input type="hidden" name="cartId" value="@ViewBag.CartId" />
+							<input type="hidden" name="productId" value="@cartItem.ProductId"/>
+							<button class="button" type="submit">Remove</button>
+						</form>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+else
+{
+	<p>No items in the cart.</p>
+}
+
+<br />
+<form asp-controller="Cart" asp-action="ClearCart" method="post">
+	<input type="hidden" name="cartId" value="@ViewBag.CartId" />
+	<button class="button" type="submit">Clear Cart</button>
+</form>
+
