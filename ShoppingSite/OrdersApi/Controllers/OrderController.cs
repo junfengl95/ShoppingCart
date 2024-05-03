@@ -23,7 +23,6 @@ namespace OrdersApi.Controllers
 		{
 			try
 			{
-
 				// check if any details are null or missing
 				if (order.CartId != 0)
 				{
@@ -49,6 +48,18 @@ namespace OrdersApi.Controllers
 			}
 
 			return this.Ok(foundOrder);
+		}
+
+		[HttpGet("user/{customerId}")]
+		public async Task<ActionResult<IEnumerable<Order>>> ReadAllOrders(string customerId)
+		{
+			var orders = await _context.Orders.Where(order => order.CustomerId ==customerId).ToListAsync();
+			if (orders == null)
+			{
+				return NotFound();
+			}
+
+			return this.Ok(orders);
 		}
 	}
 }

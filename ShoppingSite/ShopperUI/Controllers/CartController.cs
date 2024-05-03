@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ShopperUI.ApiClient;
 using ShopperUI.Areas.Identity.Data;
@@ -6,6 +7,7 @@ using ShopperUI.Models;
 
 namespace ShopperUI.Controllers
 {
+    [Authorize]
     public class CartController : Controller
     {
         private readonly IShopperUIClient _shopperUIClient;

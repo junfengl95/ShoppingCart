@@ -45,6 +45,15 @@ builder.Services.AddHttpClient("CartApi",
         httpClient.BaseAddress = new Uri("https://localhost:7227");
     });
 
+builder.Services.AddHttpClient("OrdersApi",
+	httpClient =>
+	{
+		httpClient.DefaultRequestHeaders
+				  .Accept
+				  .Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+		httpClient.BaseAddress = new Uri("https://localhost:7016");
+	});
+
 builder.Services.AddScoped<IShopperUIClient, ShopperUIClient>();
 
 var app = builder.Build();

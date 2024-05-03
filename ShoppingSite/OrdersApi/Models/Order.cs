@@ -9,11 +9,10 @@ public partial class Order
 
     public DateTime DateOfCreation { get; set; }
 
-    public decimal TotalPrice { get; set; }
+    public decimal? TotalPrice { get; set; }
 
     public int CartId { get; set; }
 
-    public int CartCustomerId { get; set; }
+    public string CustomerId { get; set; }
 
-    public string ProductIds { get; set; } = null!;
 }

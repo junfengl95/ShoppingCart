@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using ShopperUI.Models;
 
 namespace ShopperUI.Areas.Identity.Data;
 
@@ -23,5 +24,7 @@ public class ShopperUIUser : IdentityUser
     [PersonalData]
     [Column(TypeName = "int")]
     public int? CartId { get; set; }
+
+	public virtual ICollection<Order> CartItems { get; set; } = new List<Order>();
 }
 

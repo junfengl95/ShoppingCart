@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ShopperUI.ApiClient;
 using ShopperUI.Models;
 
 namespace ShopperUI.Controllers
 {
+	[Authorize]
 	public class ProductController : Controller
 	{
 		private readonly IShopperUIClient _shopperUIClient;

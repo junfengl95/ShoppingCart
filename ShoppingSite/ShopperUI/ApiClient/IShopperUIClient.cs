@@ -16,7 +16,12 @@ namespace ShopperUI.ApiClient
         Task ClearCart(int cartId);
 
         Task<Cart?> GetCartById(int cartId);
+
+        Task<List<Order>?> GetAllOrders(string customerId);
+
+        Task<Order?> CreateNewOrder(Order order);
+
         //Task<Order?> GetOrderByIdAsync(int orderId);
-        //Task<Order> CreateNewOrder(Order order);
+
     }
 }

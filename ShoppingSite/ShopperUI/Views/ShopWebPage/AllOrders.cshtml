@@ -1,0 +1,24 @@
+﻿@model List<ShopperUI.Models.Order>;
+
+@{
+	ViewData["Title"] = "AllOrders";
+}
+
+@if (object.ReferenceEquals(Model, null))
+{
+	<h3> No exisiting orders</h3>
+}
+else
+{
+	@foreach (var order in Model)
+	{
+		<p>Order Id: @order.OrderId</p>
+		<p>Order Price: @order.TotalPrice</p>
+		<p>Order Created: @order.DateOfCreation</p>
+		<br />
+
+		<a class="button" asp-controller="Order" asp-action="OneOrder" asp-route-id="@order.OrderId">Details</a>
+		<hr />
+	}
+}
+

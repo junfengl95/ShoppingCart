@@ -1,0 +1,19 @@
+﻿@model ShopperUI.Models.Order;
+
+@{
+	ViewData["Title"] = "OneOrder";
+}
+
+<h1>Order Details</h1>
+
+
+@if (object.ReferenceEquals(Model, null))
+{
+	<h3> Order not found for @Model.OrderId</h3>
+}
+else
+{
+	<p>Order Id: @Model.OrderId</p>
+	<p>Order Price: @Model.TotalPrice</p>
+	<p>Order Created: @Model.DateOfCreation</p>
+}

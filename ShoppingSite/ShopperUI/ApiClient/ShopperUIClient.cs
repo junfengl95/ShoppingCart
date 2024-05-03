@@ -150,5 +150,41 @@ namespace ShopperUI.ApiClient
             }
         }
 
-    }
+        public async Task<List<Order>?> GetAllOrders(string customerId)
+        {
+
+			//Call ProductApiClient
+			var client = _httpClientFactory.CreateClient("OrdersApi");
+			var orders = client.GetStreamAsync($"/api/Order/user/{customerId}");
+
+            if (object.ReferenceEquals(orders, null))
+            {
+                return null;
+            }
+
+			return await JsonSerializer.DeserializeAsync<List<Order>>(await orders);
+		}
+
+
+        public async Task<Order?> CreateNewOrder(Order order)
+        {
+            var client = _httpClientFactory.CreateClient("OrdersApi");
+            var jsonOrder = JsonSerializer.Serialize(order, typeof(Order));
+            StringContent content = new StringContent(jsonOrder, System.Text.Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await client.PostAsync("api/Order", content);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var responseBody = await response.Content.ReadAsStreamAsync();
+                // Deseriallize the order
+                var createdOrder = await JsonSerializer.DeserializeAsync<Order>(responseBody);
+
+                return createdOrder;
+            }
+            else
+            {
+                return null;
+            }
+        }
+	}
 }
