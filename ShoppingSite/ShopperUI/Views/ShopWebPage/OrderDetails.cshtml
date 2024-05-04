@@ -1,0 +1,42 @@
+﻿@model ShopperUI.ViewModels.OrderViewModel;
+
+@{
+	ViewData["Title"] = "OrderDetails";
+}
+
+<h2>Order Details</h2>
+
+
+@if (object.ReferenceEquals(Model, null))
+{
+	<h3>No Orders were made </h3>
+}
+else
+{
+	<h3>Cart Items</h3>
+	@if (Model.CartItems != null && Model.CartItems.Any())
+	{
+		<table>
+			<thead>
+				<tr>
+					<th>Cart Item ID</th>
+					<th>Product ID</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var cartItem in Model.CartItems)
+				{
+					<tr>
+						<td>@cartItem.CartItemId</td>
+						<td>@cartItem.ProductId</td>
+
+					</tr>
+				}
+			</tbody>
+		</table>
+	}
+	else
+	{
+		<p>No items in the cart.</p>
+	}
+}

@@ -18,7 +18,7 @@ The database will contain two tables
 - Carts
 - CartItems
 
-## Orders REST API (Incomplete)
+## Orders REST API
 This API provide services of Order resources that will persist to a Sql Server Database named Orders
 
 ## Shopper UI Client

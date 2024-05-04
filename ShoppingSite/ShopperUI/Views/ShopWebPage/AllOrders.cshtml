@@ -17,7 +17,7 @@ else
 		<p>Order Created: @order.DateOfCreation</p>
 		<br />
 
-		<a class="button" asp-controller="Order" asp-action="OneOrder" asp-route-id="@order.OrderId">Details</a>
+		<a class="button" asp-controller="Order" asp-action="OrderDetails" asp-route-orderId="@order.OrderId">Details</a>
 		<hr />
 	}
 }

@@ -1,4 +1,7 @@
-﻿using ShopperUI.Models;
+﻿using Microsoft.AspNetCore.Identity;
+using ShopperUI.Areas.Identity.Data;
+using ShopperUI.Models;
+using System.Security.Claims;
 using System.Text.Json;
 
 namespace ShopperUI.ApiClient
@@ -6,13 +9,15 @@ namespace ShopperUI.ApiClient
     public class ShopperUIClient : IShopperUIClient
     {
         private readonly IHttpClientFactory _httpClientFactory;
+		private readonly UserManager<ShopperUIUser> _userManager;
 
-        public ShopperUIClient(IHttpClientFactory httpClientFactory)
+		public ShopperUIClient(IHttpClientFactory httpClientFactory, UserManager<ShopperUIUser> userManager)
         {
             _httpClientFactory = httpClientFactory;
+            _userManager = userManager;
         }
 
-        public async Task<Cart?> CreateNewCart()
+		public async Task<Cart?> CreateNewCart()
         {
             var client = _httpClientFactory.CreateClient("CartApi");
             var jsonCart = JsonSerializer.Serialize(new Cart(), typeof(Cart));
@@ -36,8 +41,6 @@ namespace ShopperUI.ApiClient
                     return null;
                 }
 			}
-
-                
             else
             {
                 Console.WriteLine($"Failed to create a new cart. Status code: {response.StatusCode}");
@@ -166,25 +169,56 @@ namespace ShopperUI.ApiClient
 		}
 
 
-        public async Task<Order?> CreateNewOrder(Order order)
+		public async Task<Order?> CreateNewOrder(int cartId, string userId, decimal? totalPrice)
+		{
+			try
+			{
+				var client = _httpClientFactory.CreateClient("OrdersApi");
+
+				var order = new Order
+				{
+					DateOfCreation = DateTime.Now,
+                    CartId = cartId,
+                    TotalPrice = totalPrice,
+                    CustomerId = userId
+				};
+
+				Console.WriteLine($"time of creation: {order.DateOfCreation}");
+
+				var jsonOrder = JsonSerializer.Serialize(order, typeof(Order));
+				StringContent content = new StringContent(jsonOrder, System.Text.Encoding.UTF8, "application/json");
+				HttpResponseMessage response = await client.PostAsync("/api/Order", content);
+
+				if (response.IsSuccessStatusCode)
+				{
+					var responseBody = await response.Content.ReadAsStreamAsync();
+					var createdOrder = await JsonSerializer.DeserializeAsync<Order>(responseBody);
+					return createdOrder;
+				}
+				else
+				{
+					Console.WriteLine($"Failed to create order: {response.StatusCode}");
+					return null;
+				}
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine($"Exception occurred: {ex}");
+				return null;
+			}
+		}
+
+		public async Task<Order?> GetOrderByIdAsync(int orderId)
         {
             var client = _httpClientFactory.CreateClient("OrdersApi");
-            var jsonOrder = JsonSerializer.Serialize(order, typeof(Order));
-            StringContent content = new StringContent(jsonOrder, System.Text.Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PostAsync("api/Order", content);
-
+            HttpResponseMessage response = await client.GetAsync($"/api/Order/{orderId}"); 
             if (response.IsSuccessStatusCode)
             {
                 var responseBody = await response.Content.ReadAsStreamAsync();
-                // Deseriallize the order
-                var createdOrder = await JsonSerializer.DeserializeAsync<Order>(responseBody);
+                return await JsonSerializer.DeserializeAsync<Order>(responseBody);
+            }
 
-                return createdOrder;
-            }
-            else
-            {
-                return null;
-            }
+            return null;
         }
 	}
 }

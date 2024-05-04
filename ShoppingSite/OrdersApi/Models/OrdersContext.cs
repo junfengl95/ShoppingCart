@@ -25,6 +25,7 @@ public partial class OrdersContext : DbContext
 
             entity.Property(e => e.DateOfCreation).HasColumnType("datetime");
             entity.Property(e => e.TotalPrice).HasColumnType("decimal(18, 2)");
+
         });
 
         OnModelCreatingPartial(modelBuilder);

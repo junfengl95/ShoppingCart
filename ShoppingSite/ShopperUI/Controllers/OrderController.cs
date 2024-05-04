@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using ShopperUI.ApiClient;
 using ShopperUI.Areas.Identity.Data;
 using ShopperUI.Models;
+using ShopperUI.ViewModels;
 
 namespace ShopperUI.Controllers
 {
@@ -39,38 +40,100 @@ namespace ShopperUI.Controllers
 			return View("~/Views/ShopWebPage/AllOrders.cshtml", orders);
 		}
 
-		//[HttpPost]
-		//public async Task<IActionResult> CheckoutCart(Order order)
-		//{
-		//	var cartId = HttpContext.Session.GetInt32("CartId");
+		[HttpGet]
+		public async Task<IActionResult> OrderDetails(int orderId)
+		{
+            var user = await _userManager.GetUserAsync(User);
 
-		//	if (cartId == null)
-		//	{
-		//		Console.WriteLine("CartId wrong");
-		//		// Handle the scenario where cartId is null (e.g., redirect to an error page or return an error message)
-		//		return RedirectToAction("Error");
-		//	}
+            if (user == null)
+            {
+                return Unauthorized();
+            }
 
-		//	Cart? cart = await _shopperUIClient.GetCartById(cartId.Value);
+            // Fetch order details 
+            Order? order = await _shopperUIClient.GetOrderByIdAsync(orderId);
 
-		//	if (cart == null)
-		//	{
-		//		return NotFound();
-		//	}
+			if (order == null)
+			{
+				return NotFound();
+			}
 
-		//	// Created the Order after verifying the Cart exist
+			Cart? foundCart = await _shopperUIClient.GetCartById(order.CartId);
 
-		//	order.CartId = cartId.Value;
+			if(foundCart == null)
+			{
+				return NotFound();
+			}
 
-		//	var createdOrder = await _shopperUIClient.CreateNewOrder(order);
 
-		//	if (createdOrder != null)
-		//	{
-		//		createdOrder.TotalPrice = cart.CartPrice;
+			var orderView = new OrderViewModel()
+			{
+				OrderId = orderId,
+				DateOfCreation = order.DateOfCreation,
+				CartId = foundCart.CartId,
+				TotalPrice = foundCart.CartPrice,
+				CartItems = foundCart.CartItems,
+				UserId = user.Id
+			};
 
-		//		return RedirectToAction("Orders", new { order = createdOrder.OrderId });
-		//	}
 
-		//}
+			await _shopperUIClient.ClearCart(foundCart.CartId);
+
+
+			return View("~/Views/ShopWebPage/OrderDetails.cshtml", orderView);
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> CheckoutCart()
+		{
+			var cartId = HttpContext.Session.GetInt32("CartId");
+
+			if (cartId == null)
+			{
+				Console.WriteLine("CartId wrong");
+				// Handle the scenario where cartId is null (e.g., redirect to an error page or return an error message)
+				return RedirectToAction("Error");
+			}
+
+			Cart? cart = await _shopperUIClient.GetCartById(cartId.Value);
+
+			if (cart == null)
+			{
+				return NotFound();
+			}
+
+			var user = await _userManager.GetUserAsync(User);
+
+			if (user == null)
+			{
+				return Unauthorized();
+			}
+
+			// Created the Order after verifying the Cart exist
+
+			var createdOrder = await _shopperUIClient.CreateNewOrder(cartId.Value, user.Id, cart.CartPrice);
+
+			if (createdOrder != null)
+			{
+				createdOrder.TotalPrice = cart.CartPrice;
+
+				//Console.WriteLine($"Total price : {cart.CartPrice}");
+
+				createdOrder.CustomerId = user.Id;
+
+				//Console.WriteLine($"UserId : {user.Id}");
+
+				user.Orders.Add(createdOrder);
+
+				return RedirectToAction("AllOrders", "Order");
+			}
+
+			else
+			{
+                Console.WriteLine($"Failed to create order form CartId: {cartId}");
+                ModelState.AddModelError(string.Empty, "Failed to create order. Please try again later.");
+                return View("~/Views/ShopWebPage/AllOrders.cshtml"); // Return to the same view with error messages
+            }
+		}
 	}
 }

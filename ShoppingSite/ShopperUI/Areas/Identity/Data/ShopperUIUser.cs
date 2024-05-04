@@ -25,6 +25,6 @@ public class ShopperUIUser : IdentityUser
     [Column(TypeName = "int")]
     public int? CartId { get; set; }
 
-	public virtual ICollection<Order> CartItems { get; set; } = new List<Order>();
+	public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 }
 

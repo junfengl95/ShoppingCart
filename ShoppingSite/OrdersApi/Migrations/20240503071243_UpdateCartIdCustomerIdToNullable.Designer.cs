@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OrdersApi.Models;
 
@@ -11,9 +12,11 @@ using OrdersApi.Models;
 namespace OrdersApi.Migrations
 {
     [DbContext(typeof(OrdersContext))]
-    partial class OrdersContextModelSnapshot : ModelSnapshot
+    [Migration("20240503071243_UpdateCartIdCustomerIdToNullable")]
+    partial class UpdateCartIdCustomerIdToNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,7 +33,7 @@ namespace OrdersApi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"));
 
-                    b.Property<int>("CartId")
+                    b.Property<int?>("CartId")
                         .HasColumnType("int");
 
                     b.Property<string>("CustomerId")

@@ -30,7 +30,7 @@ namespace OrdersApi.Controllers
 					await _context.SaveChangesAsync();
 					return this.Ok(order);
 				}
-				return this.NotFound();
+				return BadRequest("Invalid CartId");
 			}
 			catch (Exception ex)
 			{
@@ -51,9 +51,23 @@ namespace OrdersApi.Controllers
 		}
 
 		[HttpGet("user/{customerId}")]
-		public async Task<ActionResult<IEnumerable<Order>>> ReadAllOrders(string customerId)
+		public async Task<ActionResult<IEnumerable<Order>>> ReadAllOrdersForCustomer(string customerId)
 		{
 			var orders = await _context.Orders.Where(order => order.CustomerId ==customerId).ToListAsync();
+
+			if (orders == null)
+			{
+				return NotFound();
+			}
+
+			return this.Ok(orders);
+		}
+
+		[HttpGet("AllOrders")]
+		public async Task<ActionResult<IEnumerable<Order>>> ReadAllOrders()
+		{
+			var orders = await _context.Orders.ToListAsync();
+
 			if (orders == null)
 			{
 				return NotFound();
