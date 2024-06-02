@@ -29,5 +29,14 @@ Available products are the product resources managed by the Porduct REST API.
 
 The client user will be adding and removing products from a cart which is managed by the CART REST API.
 
+## Screenshots
+
+### AllProducts Page
+![All Products](ShoppingSite/MVC Screenshots/AllProduct.png)
+
+
+### ProductDetails Page
+![All Products](ShoppingSite/MVC Screenshots/Prodcut Details.png)
+
 
 For more details of each component refer to their individual README.md 
