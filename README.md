@@ -32,11 +32,11 @@ The client user will be adding and removing products from a cart which is manage
 ## Screenshots
 
 ### AllProducts Page
-![All Products](ShoppingSite/MVC Screenshots/AllProduct.png)
+![All Products](ShoppingSite/MVC%20Screenshots/AllProduct.png)
 
 
 ### ProductDetails Page
-![All Products](ShoppingSite/MVC Screenshots/Prodcut Details.png)
+![All Products](ShoppingSite/MVC%20Screenshots/Product%20Details.png)
 
 
 For more details of each component refer to their individual README.md 
