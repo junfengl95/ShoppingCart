@@ -11,8 +11,8 @@ namespace ShopperUI.ApiClient
         Task<Cart?> CreateNewCart();
 
 
-        Task<CartItem?> AddProductToCartAsync(int cartId, int productId);
-        Task DeleteProductFromCartAsync(int cartId, int productId);
+        Task<CartItem?> AddProductToCartAsync(int cartId, int productId, int quantity);
+        Task DeleteProductFromCartAsync(int cartId, int productId, int quantity);
         Task ClearCart(int cartId);
 
         Task<Cart?> GetCartById(int cartId);

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using ShopperUI.Areas.Identity.Data;
 using ShopperUI.Models;
+using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Text.Json;
 
@@ -10,11 +11,13 @@ namespace ShopperUI.ApiClient
     {
         private readonly IHttpClientFactory _httpClientFactory;
 		private readonly UserManager<ShopperUIUser> _userManager;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-		public ShopperUIClient(IHttpClientFactory httpClientFactory, UserManager<ShopperUIUser> userManager)
+		public ShopperUIClient(IHttpClientFactory httpClientFactory, UserManager<ShopperUIUser> userManager, IHttpContextAccessor httpContextAccessor)
         {
             _httpClientFactory = httpClientFactory;
             _userManager = userManager;
+            _httpContextAccessor = httpContextAccessor;
         }
 
 		public async Task<Cart?> CreateNewCart()
@@ -79,8 +82,23 @@ namespace ShopperUI.ApiClient
         {
             //Call ProductApiClient
             var client = _httpClientFactory.CreateClient("ProductApi");
-            var products = client.GetStreamAsync("/api/Product");
 
+            // Retrieve the current logged-in user
+            var user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+
+            if (user != null)
+            {
+                // Retrieve the authentication token for the user
+                var accessToken = await _userManager.GetAuthenticationTokenAsync(user, "Bearer", "access_token");
+
+                if (!string.IsNullOrEmpty(accessToken))
+                {
+                    // Include the authentication token in the request headers
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+                }
+            }
+
+            var products = client.GetStreamAsync("/api/Product");
             return await JsonSerializer.DeserializeAsync<List<Product>>(await products);
         }
 
@@ -98,25 +116,24 @@ namespace ShopperUI.ApiClient
             return null;
         }
 
-        public async Task<CartItem?> AddProductToCartAsync(int cartId, int productId)
+        public async Task<CartItem?> AddProductToCartAsync(int cartId, int productId, int quantity)
         {
             var client = _httpClientFactory.CreateClient("CartApi");
             var jsonCartItem = JsonSerializer.Serialize(new CartItem(), typeof(CartItem));
             StringContent content = new StringContent(jsonCartItem, System.Text.Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PostAsync($"/api/Cart/{cartId}/add-product/{productId}", content );
+            HttpResponseMessage response = await client.PostAsync($"/api/Cart/{cartId}/add-product/{productId}/{quantity}", content);
             var responseBody = await response.Content.ReadAsStreamAsync();
 
             //Deserialize the response body into Cart Item
             var createdCartItem = await JsonSerializer.DeserializeAsync<CartItem>(responseBody);
 
             return createdCartItem;
-
         }
 
-        public async Task DeleteProductFromCartAsync(int cartId, int productId)
+        public async Task DeleteProductFromCartAsync(int cartId, int productId, int quantity)
         {
             var client = _httpClientFactory.CreateClient("CartApi");
-            var response = await client.DeleteAsync($"/api/Cart/{cartId}/remove-product/{productId}");
+            var response = await client.DeleteAsync($"/api/Cart/{cartId}/remove-product/{productId}/{quantity}");
 
             if (!response.IsSuccessStatusCode)
             {

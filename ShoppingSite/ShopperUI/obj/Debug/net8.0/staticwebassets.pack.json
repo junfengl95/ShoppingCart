@@ -5,6 +5,86 @@
       "PackagePath": "staticwebassets\\ShopperUI.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\ShoppingSite\\ShoppingSite\\ShopperUI\\wwwroot\\ProductImages\\Apple.jpg",
+      "PackagePath": "staticwebassets\\ProductImages\\Apple.jpg"
+    },
+    {
+      "Id": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\ShoppingSite\\ShoppingSite\\ShopperUI\\wwwroot\\ProductImages\\Brocolli.jpg",
+      "PackagePath": "staticwebassets\\ProductImages\\Brocolli.jpg"
+    },
+    {
+      "Id": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\ShoppingSite\\ShoppingSite\\ShopperUI\\wwwroot\\ProductImages\\Camera.jpg",
+      "PackagePath": "staticwebassets\\ProductImages\\Camera.jpg"
+    },
+    {
+      "Id": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\ShoppingSite\\ShoppingSite\\ShopperUI\\wwwroot\\ProductImages\\Carrot.jpg",
+      "PackagePath": "staticwebassets\\ProductImages\\Carrot.jpg"
+    },
+    {
+      "Id": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\ShoppingSite\\ShoppingSite\\ShopperUI\\wwwroot\\ProductImages\\CoffeeMaker.jpg",
+      "PackagePath": "staticwebassets\\ProductImages\\CoffeeMaker.jpg"
+    },
+    {
+      "Id": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\ShoppingSite\\ShoppingSite\\ShopperUI\\wwwroot\\ProductImages\\FryingPan.jpg",
+      "PackagePath": "staticwebassets\\ProductImages\\FryingPan.jpg"
+    },
+    {
+      "Id": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\ShoppingSite\\ShoppingSite\\ShopperUI\\wwwroot\\ProductImages\\HandMixer.jpg",
+      "PackagePath": "staticwebassets\\ProductImages\\HandMixer.jpg"
+    },
+    {
+      "Id": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\ShoppingSite\\ShoppingSite\\ShopperUI\\wwwroot\\ProductImages\\Hat.jpg",
+      "PackagePath": "staticwebassets\\ProductImages\\Hat.jpg"
+    },
+    {
+      "Id": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\ShoppingSite\\ShoppingSite\\ShopperUI\\wwwroot\\ProductImages\\Headphone.jpg",
+      "PackagePath": "staticwebassets\\ProductImages\\Headphone.jpg"
+    },
+    {
+      "Id": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\ShoppingSite\\ShoppingSite\\ShopperUI\\wwwroot\\ProductImages\\Jeans.jpg",
+      "PackagePath": "staticwebassets\\ProductImages\\Jeans.jpg"
+    },
+    {
+      "Id": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\ShoppingSite\\ShoppingSite\\ShopperUI\\wwwroot\\ProductImages\\Laptop.jpg",
+      "PackagePath": "staticwebassets\\ProductImages\\Laptop.jpg"
+    },
+    {
+      "Id": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\ShoppingSite\\ShoppingSite\\ShopperUI\\wwwroot\\ProductImages\\Milk.jpg",
+      "PackagePath": "staticwebassets\\ProductImages\\Milk.jpg"
+    },
+    {
+      "Id": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\ShoppingSite\\ShoppingSite\\ShopperUI\\wwwroot\\ProductImages\\Orange.jpg",
+      "PackagePath": "staticwebassets\\ProductImages\\Orange.jpg"
+    },
+    {
+      "Id": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\ShoppingSite\\ShoppingSite\\ShopperUI\\wwwroot\\ProductImages\\Oven.jpg",
+      "PackagePath": "staticwebassets\\ProductImages\\Oven.jpg"
+    },
+    {
+      "Id": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\ShoppingSite\\ShoppingSite\\ShopperUI\\wwwroot\\ProductImages\\Scarf.jpg",
+      "PackagePath": "staticwebassets\\ProductImages\\Scarf.jpg"
+    },
+    {
+      "Id": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\ShoppingSite\\ShoppingSite\\ShopperUI\\wwwroot\\ProductImages\\Shirts.jpg",
+      "PackagePath": "staticwebassets\\ProductImages\\Shirts.jpg"
+    },
+    {
+      "Id": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\ShoppingSite\\ShoppingSite\\ShopperUI\\wwwroot\\ProductImages\\Shoes.jpg",
+      "PackagePath": "staticwebassets\\ProductImages\\Shoes.jpg"
+    },
+    {
+      "Id": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\ShoppingSite\\ShoppingSite\\ShopperUI\\wwwroot\\ProductImages\\Smartphone.jpg",
+      "PackagePath": "staticwebassets\\ProductImages\\Smartphone.jpg"
+    },
+    {
+      "Id": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\ShoppingSite\\ShoppingSite\\ShopperUI\\wwwroot\\ProductImages\\Smartwatch.jpg",
+      "PackagePath": "staticwebassets\\ProductImages\\Smartwatch.jpg"
+    },
+    {
+      "Id": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\ShoppingSite\\ShoppingSite\\ShopperUI\\wwwroot\\ProductImages\\Wok.jpg",
+      "PackagePath": "staticwebassets\\ProductImages\\Wok.jpg"
+    },
+    {
       "Id": "C:\\Users\\junfe\\OneDrive\\Desktop\\.NET Course\\ShoppingSite\\ShoppingSite\\ShopperUI\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

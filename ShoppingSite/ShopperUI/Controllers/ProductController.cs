@@ -2,6 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using ShopperUI.ApiClient;
 using ShopperUI.Models;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
+using System.IO;
 
 namespace ShopperUI.Controllers
 {
@@ -42,7 +45,7 @@ namespace ShopperUI.Controllers
 		[HttpGet("/Product/OneProduct/{productId}")]
 		public async Task<IActionResult> OneProduct(int productId)
 		{
-			//productId = 50001;
+			
 			Product? product = await _shopperUIClient.GetProductByIdAsync(productId);
 
 			if (object.ReferenceEquals(product, null))
@@ -51,6 +54,34 @@ namespace ShopperUI.Controllers
 			}
 
 			return View("~/Views/ShopWebPage/OneProduct.cshtml", product);
+		}
+
+		[HttpGet("GetResizedImage")]
+		public async Task<IActionResult> GetResizedImageFromDatabase(int productId, int width, int height)
+		{
+			var product = await _shopperUIClient.GetProductByIdAsync(productId);
+			if (product == null || string.IsNullOrEmpty(product.ProductImage))
+			{
+				return NotFound("Product does not Exist");
+			}
+
+			var imagePath = Path.Combine("wwwroot", product.ProductImage.TrimStart('/'));
+
+			if (!System.IO.File.Exists(imagePath))
+			{
+				return NotFound("File not Found");
+			}
+
+			using (var image = Image.Load(imagePath))
+			{
+				image.Mutate(x => x.Resize(width, height));
+
+				var memoryStream = new MemoryStream();
+				image.Save(memoryStream, new SixLabors.ImageSharp.Formats.Png.PngEncoder());
+				memoryStream.Seek(0, SeekOrigin.Begin);
+
+				return File(memoryStream, "image/png"); // ASP.NET Core will dispose the stream
+			}
 		}
 	}
 }

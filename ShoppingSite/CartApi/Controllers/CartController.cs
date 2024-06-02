@@ -81,8 +81,8 @@ namespace CartApi.Controllers
 			return this.Ok(cartsWithItems);
 		}
 
-		[HttpPost("{cartId}/add-product/{productId}")]
-		public async Task<ActionResult> AddProductToCart(int cartId, int productId)
+		[HttpPost("{cartId}/add-product/{productId}/{quantity}")]
+		public async Task<ActionResult> AddProductToCart(int cartId, int productId, int quantity)
 		{
 			// Check if cart exist
 			var foundCart = await _context.Carts.FindAsync(cartId);
@@ -97,23 +97,32 @@ namespace CartApi.Controllers
 			{
 				return this.NotFound();
 			}
+		
 
 			var cartitem = new CartItem
 			{
 				ProductId = productId,
 				FkCartId = cartId,
+				Quantity = quantity
 			};
 
 			_context.CartItems.Add(cartitem);
 
 			foundCart.CartPrice = await CalculateTotalCartPrice(cartId);
+
+			var updateQuantityResult = await _productClient.UpdateProductQuantity(productId, -quantity);
+			if (!updateQuantityResult)
+			{
+				return this.BadRequest("Failed to update product quantity");
+			}
+
 			await _context.SaveChangesAsync();
 
 			return this.Ok(foundCart);
 		}
 
-		[HttpDelete("{cartId}/remove-product/{productId}")]
-		public async Task<ActionResult<bool>> RemoveProductFromCart(int cartId, int productId)
+		[HttpDelete("{cartId}/remove-product/{productId}/{quantity}")]
+		public async Task<ActionResult<bool>> RemoveProductFromCart(int cartId, int productId, [FromQuery] int quantity)
 		{
 			var foundCartWithItems = await _context.Carts
 												   .Include(cart => cart.CartItems)
@@ -130,13 +139,28 @@ namespace CartApi.Controllers
 			{
 				return this.NotFound();
 			}
+
+			if (productInCart.Quantity <= quantity)
+			{
+				// If the quantity to remove exceeds the quantity in the cart, remove the entire product
+				foundCartWithItems.CartItems.Remove(productInCart);
+			}
 			else
 			{
-				foundCartWithItems.CartItems.Remove(productInCart);
-				foundCartWithItems.CartPrice = await CalculateTotalCartPrice(cartId);
-				await _context.SaveChangesAsync();
-				return this.Ok(foundCartWithItems);
-			}
+				productInCart.Quantity -= quantity;
+
+                var updateQuantityResult = await _productClient.UpdateProductQuantity(productId, quantity);
+                if (!updateQuantityResult)
+                {
+                    return this.BadRequest("Failed to update product quantity");
+                }
+            }
+
+			foundCartWithItems.CartPrice = await CalculateTotalCartPrice(cartId);
+
+			await _context.SaveChangesAsync();
+
+			return this.Ok(foundCartWithItems);
 		}
 
 		[HttpDelete("clear-items/{cartId}")]
@@ -150,15 +174,36 @@ namespace CartApi.Controllers
 			{
 				return this.NotFound();
 			}
-			else
-			{
-				foundCartWithItems.CartItems.Clear();
-				foundCartWithItems.CartPrice = await CalculateTotalCartPrice(cartId);
-				await _context.SaveChangesAsync();
 
-				return this.Ok();
+			// Store the quanties of products being removed from the cart
+			var removedQuantities = new Dictionary<int, int>(); // productId , quantity
+
+			foreach(var cartItem in foundCartWithItems.CartItems)
+			{
+				if (!removedQuantities.ContainsKey(cartItem.Quantity))
+				{
+                    // If dict does not contain the product Id to match with Cart no change
+                    removedQuantities[cartItem.ProductId] = 0; 
+                }
+
+				// If found assign the values to the quantity for the product Id
+				removedQuantities[cartItem.ProductId] += cartItem.Quantity;
 			}
-		}
+
+			foundCartWithItems.CartItems.Clear();
+
+			foundCartWithItems.CartPrice = await CalculateTotalCartPrice(cartId);
+
+			// Update the product quantity
+			foreach (var (productId, quantity) in removedQuantities)
+			{
+				await _productClient.UpdateProductQuantity(productId, quantity);
+			}
+
+			await _context.SaveChangesAsync();
+
+			return Ok();
+;		}
 
 
 		private async Task<decimal?> CalculateTotalCartPrice(int cartId)
@@ -172,9 +217,11 @@ namespace CartApi.Controllers
 				return 0;
 			}
 
-			var productIds = cart.CartItems.Select(ci => ci.ProductId).ToList();
+			var productQuantities = cart.CartItems
+										.GroupBy(ci => ci.ProductId)
+										.ToDictionary(g => g.Key, g => g.Sum(ci => ci.Quantity));
 
-			decimal totalCartPrice = await _productClient.GetTotalProductPrice(productIds);
+			decimal totalCartPrice = await _productClient.GetTotalProductPrice(productQuantities);
 
 			return totalCartPrice;
 		}

@@ -56,7 +56,7 @@ namespace ShopperUI.Controllers
         }
 
 		[HttpPost]
-		public async Task<IActionResult> AddProductToCart(int productId)
+		public async Task<IActionResult> AddProductToCart(int productId, int quantity)
 		{
 			// Retrieve cartId from session state
 			var cartId = HttpContext.Session.GetInt32("CartId");
@@ -70,7 +70,7 @@ namespace ShopperUI.Controllers
 			}
 
 			// Call the AddProductToCartAsync method with the retrieved cartId and productId
-			var cartItem = await _shopperUIClient.AddProductToCartAsync(cartId.Value, productId);
+			var cartItem = await _shopperUIClient.AddProductToCartAsync(cartId.Value, productId, quantity);
 
 			// Check if cartItem is null (e.g., if the API call fails)
 			if (cartItem == null)
@@ -86,7 +86,7 @@ namespace ShopperUI.Controllers
 
         // Instead of HttpDelete substitute with HttpPost
         [HttpPost] 
-        public async Task<IActionResult> DeleteProductFromCart(int productId)
+        public async Task<IActionResult> DeleteProductFromCart(int productId, int quantity)
         {
 			var cartId = HttpContext.Session.GetInt32("CartId");
 
@@ -95,7 +95,7 @@ namespace ShopperUI.Controllers
                 return RedirectToAction("Error");
             }
 
-			await _shopperUIClient.DeleteProductFromCartAsync(cartId.Value, productId);
+			await _shopperUIClient.DeleteProductFromCartAsync(cartId.Value, productId, quantity);
 
             return RedirectToAction(nameof(GetUserCart));
 		}

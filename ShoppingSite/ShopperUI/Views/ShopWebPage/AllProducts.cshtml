@@ -1,4 +1,7 @@
-﻿@model List<ShopperUI.Models.Product>;
+﻿@using System.IO;
+
+@model List<ShopperUI.Models.Product>;
+
 
 @{
 	ViewData["Title"] = "AllProducts";
@@ -13,16 +16,17 @@
 
 @foreach (var product in Model)
 {
-	<p>Product Id: @product.ProductId</p>
+	<a class="image-button" asp-controller="Product" asp-action="OneProduct" asp-route-id="@product.ProductId">
+		<img src="@Url.Action("GetResizedImageFromDatabase", "Product", new { productId = product.ProductId, width = 100, height = 100 })" alt="@product.ProductName" />
+	</a>
 	<p>Product Name: @product.ProductName</p>
 	<p>Product Price: @product.ProductPrice</p>
-	<p>Product Rating: @product.ProductRating</p>
 	<br />
 
 	@* 
 	Same result as below just more strongly typed version	
 	@Html.ActionLink("Details", "OneProduct", "Product", new { id = @product.ProductId }, null) *@
 
-	<a class="button" asp-controller="Product" asp-action="OneProduct" asp-route-id="@product.ProductId">Details</a>
+	@*<a class="button" asp-controller="Product" asp-action="OneProduct" asp-route-id="@product.ProductId">Details</a>*@
 	<hr />
 }

@@ -12,20 +12,55 @@
 }
 else
 {
-	<p>Product Id: @Model.ProductId</p>
-	<p>Product Name: @Model.ProductName</p>
-	<p>Product Price: @Model.ProductPrice</p>
-	<p>Product Rating: @Model.ProductRating</p>
+    <div class="product-details-container">
+        <div class="product-image">
+            <img src="@Url.Action("GetResizedImageFromDatabase", "Product", new { productId = Model.ProductId, width = 300, height = 300 })" alt="@Model.ProductName" />
+        </div>
+        <div class="product-info">
+            <p>Product Name: @Model.ProductName</p>
+            <p>Product Description: @Model.ProductDescription</p>
+            <p>Product Price: @Model.ProductPrice</p>
+            <p>Product Rating: @Model.ProductRating</p>
+
+            <hr/>
+            <form asp-controller="Cart" asp-action="AddProductToCart" method="post">
+                <input type="hidden" name="productId" value="@Model.ProductId" />
+                <input type="hidden" name="cartId" value="@ViewBag.CartId" />
+                <div class="quantity-container">
+                    <button type="button" id="decreaseQuantity" class="quantity-button">-</button>
+                    <input type="number" id="quantity" name="quantity" value="1" min="1" class="quantity-input" />
+                    <button type="button" id="increaseQuantity" class="quantity-button">+</button>
+                </div>
+                <br />
+                <button type="submit" class="button">Add to Cart</button>
+            </form>
+        </div>
+    </div>
 }
 
-@using (Html.BeginForm("AddProductToCart", "Cart", FormMethod.Post))
+@*using (Html.BeginForm("AddProductToCart", "Cart", FormMethod.Post))
 {
 	<input type="hidden" name="productId" value="@Model.ProductId" />
 	<input type="hidden" name="cartId" value="@ViewBag.CartId" />
 	<!-- Other form inputs -->
 	<button class="button" type="submit">Add to Cart</button>
-}
+}*@
 
-<br />
+@section Scripts {
+    <script>
+        document.getElementById("decreaseQuantity").addEventListener("click", function() {
+            var quantityInput = document.getElementById("quantity");
+            var currentValue = parseInt(quantityInput.value);
+            if (currentValue > 1) {
+                quantityInput.value = currentValue - 1;
+            }
+        });
+
+        document.getElementById("increaseQuantity").addEventListener("click", function() {
+            var quantityInput = document.getElementById("quantity");
+            quantityInput.value = parseInt(quantityInput.value) + 1;
+        });
+    </script>
+}
 
 

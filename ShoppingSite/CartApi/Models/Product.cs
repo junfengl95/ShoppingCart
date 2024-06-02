@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace CartApi.Models
 {
@@ -19,11 +20,17 @@ namespace CartApi.Models
 		[JsonPropertyName("productRating")]
 		public decimal? ProductRating { get; set; }
 
-		public override string ToString()
-		{
-			return $"productId: {ProductId}, productName: {ProductName}, productPrice: {ProductPrice}, Quantity: {ProductQuantity}, Rating: {ProductRating} ";
-		}
+        [JsonPropertyName("productDescription")]
+        public string ProductDescription { get; set; }
+        [JsonPropertyName("productCategory")]
+        public string ProductCategory { get; set; }
+        [JsonPropertyName("productImage")]
+        public string ProductImage { get; set; }
 
+        public override string ToString()
+        {
+            return $"productId: {ProductId}, productName: {ProductName}, productCategory: {ProductCategory}, productPrice: {ProductPrice}, Quantity: {ProductQuantity}, Rating: {ProductRating} ";
+        }
 
-	}
+    }
 }

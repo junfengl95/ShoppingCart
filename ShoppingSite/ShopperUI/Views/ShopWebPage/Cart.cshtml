@@ -39,20 +39,25 @@
 			}
 		</tbody>
 	</table>
+
+	<br />
+	<form asp-controller="Cart" asp-action="ClearCart" method="post">
+		<input type="hidden" name="cartId" value="@ViewBag.CartId" />
+		<button class="button" type="submit">Clear Cart</button>
+	</form>
+
+	<br />
+	<form asp-controller="Order" asp-action="CheckoutCart" method="post">
+		<button class="button" type="submit">Checkout</button>
+	</form>
 }
 else
 {
-	<p>No items in the cart.</p>
+	<p>Your Cart Is Empty</p>
+	<form asp-controller="Product" asp-action="AllProducts" method="get">
+		<button class="button" type="submit">Continue Shopping</button>
+	</form>
 }
 
-<br />
-<form asp-controller="Cart" asp-action="ClearCart" method="post">
-	<input type="hidden" name="cartId" value="@ViewBag.CartId" />
-	<button class="button" type="submit">Clear Cart</button>
-</form>
 
-<br />
-<form asp-controller="Order" asp-action="CheckoutCart" method="post">
-	<button class="button" type="submit">Checkout</button>
-</form>
 

@@ -20,6 +20,12 @@ namespace ShopperUI.Models
         [JsonPropertyName("productRating")]
         public decimal? ProductRating { get; set; }
 
+        [JsonPropertyName("productDescription")]
+        public string ProductDescription { get; set; }
+
+        [JsonPropertyName("productImage")]
+        public string ProductImage { get; set; }
+
         public override string ToString()
         {
             return $"productId: {ProductId}, productName: {ProductName}, productPrice: {ProductPrice}, Quantity: {ProductQuantity}, Rating: {ProductRating} ";

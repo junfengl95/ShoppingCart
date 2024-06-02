@@ -27,13 +27,13 @@ namespace CartApi.ProductsApiClient
 			return false;
 		}
 
-		public async Task<decimal> GetTotalProductPrice(List<int> productIds)
+		public async Task<decimal> GetTotalProductPrice(Dictionary<int, int> productQuantities)
 		{
 			var client = _httpClientFactory.CreateClient("ProductsApiClient");
 			// initialize totalPrice = 0
 			decimal totalPrice = 0;
 
-			foreach(var productId in productIds )
+			foreach(var (productId, quantity) in productQuantities)
 			{
 				HttpResponseMessage response = await client.GetAsync($"/api/Product/{productId}");
 
@@ -42,19 +42,34 @@ namespace CartApi.ProductsApiClient
 					var responseBody = await response.Content.ReadAsStreamAsync();
 					var product = await JsonSerializer.DeserializeAsync<Product>(responseBody);
 
-					if (object.Equals(product, null))
+					if (product != null)
 					{
-						continue;
+						var productPrice = product.ProductPrice;
+
+						await Console.Out.WriteLineAsync($"product name: {product.ProductName}, product price: {product.ProductPrice}");
+
+						totalPrice += productPrice * quantity;
 					}
-
-					var productPrice = product.ProductPrice;
-
-					await Console.Out.WriteLineAsync($"product name: {product.ProductName}, product price: {product.ProductPrice}");
-
-					totalPrice += productPrice;
 				}
 			}
 			return totalPrice;
 		}
-	}
+
+        public async Task<bool> UpdateProductQuantity(int productId, int quantity)
+        {
+            var client = _httpClientFactory.CreateClient("ProductsApiClient");
+            
+			var requestUrl = $"/api/Product/{productId}/quantityChange/{quantity}";
+
+			var request = new HttpRequestMessage(HttpMethod.Put, requestUrl);
+
+			var response = await client.SendAsync(request);
+
+			if (response.IsSuccessStatusCode)
+			{
+				return true;
+			}
+			return false;
+        }
+    }
 }
