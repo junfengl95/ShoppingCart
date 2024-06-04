@@ -86,17 +86,17 @@ namespace ShopperUI.ApiClient
             // Retrieve the current logged-in user
             var user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
 
-            if (user != null)
-            {
-                // Retrieve the authentication token for the user
-                var accessToken = await _userManager.GetAuthenticationTokenAsync(user, "Bearer", "access_token");
+            //if (user != null)
+            //{
+            //    // Retrieve the authentication token for the user
+            //    var accessToken = await _userManager.GetAuthenticationTokenAsync(user, "Bearer", "access_token");
 
-                if (!string.IsNullOrEmpty(accessToken))
-                {
-                    // Include the authentication token in the request headers
-                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
-                }
-            }
+            //    if (!string.IsNullOrEmpty(accessToken))
+            //    {
+            //        // Include the authentication token in the request headers
+            //        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+            //    }
+            //}
 
             var products = client.GetStreamAsync("/api/Product");
             return await JsonSerializer.DeserializeAsync<List<Product>>(await products);

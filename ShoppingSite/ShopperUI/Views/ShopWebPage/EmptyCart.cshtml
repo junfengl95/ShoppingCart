@@ -1,0 +1,10 @@
+﻿@model ShopperUI.Models.Cart;
+
+@{
+	ViewData["Title"] = "Cart";
+}
+
+<p>Your Cart Is Empty</p>
+<form asp-controller="Product" asp-action="AllProducts" method="get">
+    <button class="button" type="submit">Continue Shopping</button>
+</form>

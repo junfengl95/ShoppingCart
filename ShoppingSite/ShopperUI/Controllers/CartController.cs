@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using ShopperUI.ApiClient;
 using ShopperUI.Areas.Identity.Data;
 using ShopperUI.Models;
+using ShopperUI.ViewModels;
 
 namespace ShopperUI.Controllers
 {
@@ -12,11 +13,13 @@ namespace ShopperUI.Controllers
     {
         private readonly IShopperUIClient _shopperUIClient;
         private readonly UserManager<ShopperUIUser> _userManager;
+        private readonly ILogger<CartController> _logger;
 
-        public CartController(UserManager<ShopperUIUser> userManager, IShopperUIClient shopperUIClient)
+        public CartController(UserManager<ShopperUIUser> userManager, IShopperUIClient shopperUIClient, ILogger<CartController> logger)
         {
             _userManager = userManager;
             _shopperUIClient = shopperUIClient;
+            _logger = logger;
         }
 
         [HttpGet]
@@ -40,7 +43,7 @@ namespace ShopperUI.Controllers
                     user.CartId = newCart.CartId;
 					ViewBag.CartId = newCart.CartId;
                     HttpContext.Session.SetInt32("CartId", newCart.CartId);
-					return View("~/Views/ShopWebPage/Cart.cshtml", newCart);
+					return View("~/Views/ShopWebPage/EmptyCart.cshtml", newCart);
                 }
                 else
                 {
@@ -49,9 +52,39 @@ namespace ShopperUI.Controllers
             }
             else
             {
+				// Since Cart exist reassign the Values to the ViewModels
+				// Create CartItemViewModel
+				var cartItems = new List<CartItemViewModel>();
+
+				foreach (var ci in cart.CartItems)
+				{
+					var product = await _shopperUIClient.GetProductByIdAsync(ci.ProductId);
+
+					if (product != null)
+					{
+						cartItems.Add(new CartItemViewModel
+						{
+							CartItemId = ci.CartItemId,
+							ProductId = ci.ProductId,
+							ProductName = product.ProductName,
+							ProductImage = product.ProductImage,
+							Quantity = ci.Quantity,
+							ProductPrice = product.ProductPrice,
+							FKCartId = ci.FkCartId
+						});
+					}
+				}
+
+				var cartViewModel = new CartViewModel
+				{
+					CartId = cart.CartId,
+					CartPrice = cart.CartPrice,
+					CartItems = cartItems
+				};
 				ViewBag.CartId = cart.CartId;
 				HttpContext.Session.SetInt32("CartId", cart.CartId);
-                return View("~/Views/ShopWebPage/Cart.cshtml", cart);
+
+                return View("~/Views/ShopWebPage/Cart.cshtml", cartViewModel);
             }
         }
 
@@ -95,10 +128,18 @@ namespace ShopperUI.Controllers
                 return RedirectToAction("Error");
             }
 
+            if (quantity <= 0)
+            {
+                return BadRequest("Quantity must be greater than zero");
+            }
+
+            
 			await _shopperUIClient.DeleteProductFromCartAsync(cartId.Value, productId, quantity);
 
-            return RedirectToAction(nameof(GetUserCart));
-		}
+
+            return RedirectToAction("GetUserCart", "Cart");
+
+        }
 
         [HttpPost]
         public async Task<IActionResult> ClearCart()

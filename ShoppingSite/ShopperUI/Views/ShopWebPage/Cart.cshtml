@@ -1,7 +1,7 @@
-﻿@model ShopperUI.Models.Cart;
+﻿@model ShopperUI.ViewModels.CartViewModel;
 
 @{
-	ViewData["Title"] = "Cart";
+	ViewData["Title"] = "ViewCart";
 }
 
 <h1>Cart Details</h1>
@@ -12,51 +12,83 @@
 <h2>Cart Items</h2>
 @if (Model.CartItems != null && Model.CartItems.Any())
 {
-	<table>
-		<thead>
-			<tr>
-				<th>Cart Item ID</th>
-				<th>Product ID</th>
-				<th>Cart ID</th>
-				<th>Remove Product</th>
-			</tr>
-		</thead>
-		<tbody>
-			@foreach (var cartItem in Model.CartItems)
-			{
-				<tr>
-					<td>@cartItem.CartItemId</td>
-					<td>@cartItem.ProductId</td>
-					<td>@cartItem.FkCartId</td>
-					<td>
-						<form asp-controller="Cart" asp-action="DeleteProductFromCart" method="post">
-							<input type="hidden" name="cartId" value="@ViewBag.CartId" />
-							<input type="hidden" name="productId" value="@cartItem.ProductId"/>
-							<button class="button" type="submit">Remove</button>
-						</form>
-					</td>
-				</tr>
-			}
-		</tbody>
-	</table>
+    <table>
+        <thead>
+            <tr>
+                <th>Product Image</th>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Remove Product</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var cartItem in Model.CartItems)
+            {
+                <tr>
+                    <td>
+                        <div class="product-details-container">
+                            <div class="product-image">
+                                <img src="@Url.Action("GetResizedImageFromDatabase", "Product", new { productId = @cartItem.ProductId, width = 50, height = 50 })" alt="@cartItem.ProductName" />
+                            </div>
+                    </td>
+                    <td>@cartItem.ProductName</td>
+                    <td>@cartItem.ProductPrice</td>
+                    <td>
+                        <form asp-controller="Cart" asp-action="DeleteProductFromCart" method="post">
+                            <input type="hidden" name="productId" value="@cartItem.ProductId" />
+                            <input type="hidden" name="cartId" value="@ViewBag.CartId" />
+                            <div class="quantity-container">
+                                <button type="button" class="quantity-button decrease-quantity">-</button>
+                                <input type="number" name="quantity" value="@cartItem.Quantity" min="0" max="@cartItem.Quantity" class="quantity-input" />
+                                <button type="button" class="quantity-button increase-quantity">+</button>
+                            </div>
+                            <br />
+                            <button type="submit" class="button">Quantity</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 
-	<br />
-	<form asp-controller="Cart" asp-action="ClearCart" method="post">
-		<input type="hidden" name="cartId" value="@ViewBag.CartId" />
-		<button class="button" type="submit">Clear Cart</button>
-	</form>
+    <br />
+    <form asp-controller="Cart" asp-action="ClearCart" method="post">
+        <input type="hidden" name="cartId" value="@Model.CartId" />
+        <button class="button" type="submit">Clear Cart</button>
+    </form>
 
-	<br />
-	<form asp-controller="Order" asp-action="CheckoutCart" method="post">
-		<button class="button" type="submit">Checkout</button>
-	</form>
+    <br />
+    <form asp-controller="Order" asp-action="CheckoutCart" method="post">
+        <button class="button" type="submit">Checkout</button>
+    </form>
 }
 else
 {
-	<p>Your Cart Is Empty</p>
-	<form asp-controller="Product" asp-action="AllProducts" method="get">
-		<button class="button" type="submit">Continue Shopping</button>
-	</form>
+    <p>Your Cart Is Empty</p>
+    <form asp-controller="Product" asp-action="AllProducts" method="get">
+        <button class="button" type="submit">Continue Shopping</button>
+    </form>
+}
+
+@section Scripts {
+    <script>
+        document.querySelectorAll(".decrease-quantity").forEach(button => {
+            button.addEventListener("click", function () {
+                var quantityInput = this.nextElementSibling;
+                var currentValue = parseInt(quantityInput.value);
+                if (currentValue > 1) {
+                    quantityInput.value = currentValue - 1;
+                }
+            });
+        });
+
+        document.querySelectorAll(".increase-quantity").forEach(button => {
+            button.addEventListener("click", function () {
+                var quantityInput = this.previousElementSibling;
+                quantityInput.value = parseInt(quantityInput.value) + 1;
+            });
+        });
+    </script>
 }
 
 

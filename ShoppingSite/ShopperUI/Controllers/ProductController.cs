@@ -19,7 +19,7 @@ namespace ShopperUI.Controllers
 		}
 
 		[HttpGet]
-		public async Task<IActionResult> AllProducts(string searchString)
+		public async Task<IActionResult> AllProducts(string searchString, string category )
 		{
 			var products = await _shopperUIClient.GetAllProductsAsync();
 

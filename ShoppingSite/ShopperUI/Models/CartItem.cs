@@ -13,6 +13,9 @@ namespace ShopperUI.Models
         [JsonPropertyName("fkCartId")]
         public int FkCartId { get; set; }
 
+        [JsonPropertyName("quantity")]
+        public int Quantity { get; set; }
+
         [JsonIgnore]
         public virtual Cart FkCart { get; set; } = null!;
     }

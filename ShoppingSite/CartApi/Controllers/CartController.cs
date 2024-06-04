@@ -1,8 +1,8 @@
 ﻿using CartApi.Models;
 using CartApi.ProductsApiClient;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+
 
 namespace CartApi.Controllers
 {
@@ -78,89 +78,79 @@ namespace CartApi.Controllers
 				await _context.SaveChangesAsync();
 			}
 
-			return this.Ok(cartsWithItems);
+			return Ok(cartsWithItems);
 		}
 
-		[HttpPost("{cartId}/add-product/{productId}/{quantity}")]
-		public async Task<ActionResult> AddProductToCart(int cartId, int productId, int quantity)
+		[HttpPost("{cartId}/update-product/{productId}/quantity/{quantity}")]
+		public async Task<ActionResult> UpdateProductQuantityInCart(int cartId, int productId, int quantity)
 		{
+			// Check if quantity is zero
+			if (quantity == 0)
+			{
+				return BadRequest("Quantity must be non-zero");
+			}
+
 			// Check if cart exist
 			var foundCart = await _context.Carts.FindAsync(cartId);
-			if (object.ReferenceEquals (foundCart, null))
-			{
-				return this.NotFound();
-			}
+			if (foundCart == null) { return this.NotFound("Cart not found"); }
 
-			// Check if product exist using Api Clien
+			// Check if productExist
 			var productExist = await _productClient.CheckProductExistence(productId);
-			if (object.Equals(productExist, null))
+			if (!productExist) { return this.NotFound("Product not found"); }
+
+			var cartItem = await CheckIfCartItemContainProduct(productId, cartId);
+
+			if (quantity > 0) // adding product to Cart
 			{
-				return this.NotFound();
+				if (cartItem == null) // No entry for that cart and product product exist
+				{
+					var newCartItem = new CartItem
+					{
+						ProductId = productId,
+						FkCartId = cartId,
+						Quantity = quantity,
+					};
+
+					_context.CartItems.Add(newCartItem);
+				}
+				else
+				{
+					// Update quantity in the CartItem
+					cartItem.Quantity += quantity;
+					_context.CartItems.Update(cartItem);
+				}
+
+				var updateQuantityResult = await _productClient.UpdateProductQuantity(productId, quantity);
+				if (!updateQuantityResult) { return this.BadRequest(" Failed to update product quantity"); }
 			}
-		
-
-			var cartitem = new CartItem
+			else // Removing product if quantity negative
 			{
-				ProductId = productId,
-				FkCartId = cartId,
-				Quantity = quantity
-			};
+				if (cartItem == null) { return this.NotFound("Cart Item not found"); }
 
-			_context.CartItems.Add(cartitem);
+				// If the quantity to remove is greater or equal to the quantity in the cart remove the entire product
+				if (cartItem.Quantity <= -quantity)
+				{
+					_context.CartItems.Remove(cartItem);
+
+					var updateQuantityResult = await _productClient.UpdateProductQuantity(productId, -cartItem.Quantity);
+					if (!updateQuantityResult) { return this.BadRequest("Failed to update the product quantity"); }
+				}
+				else
+				{
+					// Reduce the quantity in the CartItem
+					cartItem.Quantity += quantity; // Since the quantity is negative,
+					_context.CartItems.Update(cartItem);
+
+                    var updateQuantityResult = await _productClient.UpdateProductQuantity(productId, -cartItem.Quantity);
+                    if (!updateQuantityResult) { return this.BadRequest("Failed to update the product quantity"); }
+                }
+			}
 
 			foundCart.CartPrice = await CalculateTotalCartPrice(cartId);
 
-			var updateQuantityResult = await _productClient.UpdateProductQuantity(productId, -quantity);
-			if (!updateQuantityResult)
-			{
-				return this.BadRequest("Failed to update product quantity");
-			}
-
 			await _context.SaveChangesAsync();
 
-			return this.Ok(foundCart);
-		}
-
-		[HttpDelete("{cartId}/remove-product/{productId}/{quantity}")]
-		public async Task<ActionResult<bool>> RemoveProductFromCart(int cartId, int productId, [FromQuery] int quantity)
-		{
-			var foundCartWithItems = await _context.Carts
-												   .Include(cart => cart.CartItems)
-												   .FirstOrDefaultAsync(cart => cart.CartId == cartId);
-
-			if (object.ReferenceEquals(foundCartWithItems, null))
-			{
-				return this.NotFound();
-			}
-
-			var productInCart = foundCartWithItems.CartItems.FirstOrDefault(ci => ci.ProductId == productId);
-
-			if (object.ReferenceEquals(productInCart, null))
-			{
-				return this.NotFound();
-			}
-
-			if (productInCart.Quantity <= quantity)
-			{
-				// If the quantity to remove exceeds the quantity in the cart, remove the entire product
-				foundCartWithItems.CartItems.Remove(productInCart);
-			}
-			else
-			{
-				productInCart.Quantity -= quantity;
-
-                var updateQuantityResult = await _productClient.UpdateProductQuantity(productId, quantity);
-                if (!updateQuantityResult)
-                {
-                    return this.BadRequest("Failed to update product quantity");
-                }
-            }
-
-			foundCartWithItems.CartPrice = await CalculateTotalCartPrice(cartId);
-
-			await _context.SaveChangesAsync();
-
-			return this.Ok(foundCartWithItems);
+			return Ok(foundCart);
 		}
 
 		[HttpDelete("clear-items/{cartId}")]
@@ -271,5 +261,118 @@ namespace CartApi.Controllers
 			return this.Ok();
 
 		}
-	}
+
+
+        private async Task<CartItem> CheckIfCartItemContainProduct(int productId, int cartId)
+        {
+            var cartItem = await _context.CartItems
+                                 .Where(ci => ci.ProductId == productId && ci.FkCartId == cartId)
+                                 .FirstOrDefaultAsync();
+            return cartItem;
+        }
+    }
 }
+
+//[HttpPost("{cartId}/add-product/{productId}/{quantity}")]
+//public async Task<ActionResult> AddProductToCart(int cartId, int productId, int quantity)
+//{
+//	if (quantity <= 0)
+//	{
+//              return BadRequest("Quantity must be greater than zero.");
+//          }
+
+
+//	// Check if cart exist
+//	var foundCart = await _context.Carts.FindAsync(cartId);
+//	if (foundCart == null)
+//	{
+//		return this.NotFound();
+//	}
+
+//	// Check if product exist using Api Client
+//	var productExist = await _productClient.CheckProductExistence(productId);
+//	if (!productExist)
+//	{
+//		return this.NotFound();
+//	}
+
+//          var cartItemWithProduct = await CheckIfCartItemContainProduct(productId, cartId);
+
+//	if (cartItemWithProduct == null) // No entry for that cart and product exist yet
+//	{
+//              var cartitem = new CartItem
+//              {
+//                  ProductId = productId,
+//                  FkCartId = cartId,
+//                  Quantity = quantity
+//              };
+
+//              _context.CartItems.Add(cartitem);
+//          }
+//	else
+//	{
+//              // Update quantity in the CartItem
+//              cartItemWithProduct.Quantity += quantity;
+//		_context.CartItems.Update(cartItemWithProduct);
+//	}
+
+//	foundCart.CartPrice = await CalculateTotalCartPrice(cartId);
+
+//	var updateQuantityResult = await _productClient.UpdateProductQuantity(productId, -quantity);
+//	if (!updateQuantityResult)
+//	{
+//		return this.BadRequest("Failed to update product quantity");
+//	}
+
+//	await _context.SaveChangesAsync();
+
+//	return this.Ok(foundCart);
+//}
+
+
+
+//      [HttpDelete("{cartId}/remove-product/{productId}/{quantity}")]
+//public async Task<ActionResult<bool>> RemoveProductFromCart(int cartId, int productId, [FromQuery] int quantity)
+//{
+//	var foundCartWithItems = await _context.Carts
+//										   .Include(cart => cart.CartItems)
+//										   .FirstOrDefaultAsync(cart => cart.CartId == cartId);
+
+//	if (foundCartWithItems == null)
+//	{
+//		return this.NotFound();
+//	}
+
+//          var cartItem = CheckIfCartItemContainProduct(productId, cartId);
+
+//          // If the quantity to Remove is greater than Quantity in Cart
+//          if (cartItem.Result.Quantity <= quantity)
+//	{
+//		// If the quantity to remove exceeds the quantity in the cart, remove the entire product
+//		foundCartWithItems.CartItems.Remove(cartItem.Result);
+
+//              var updateQuantityResult = await _productClient.UpdateProductQuantity(productId, cartItem.Result.Quantity);
+//              if (!updateQuantityResult)
+//              {
+//                  return this.BadRequest("Failed to update product quantity");
+//              }
+//          }
+//	else
+//	{
+//              // If the quantity to Remove is less than the Quantity in Cart
+//              cartItem.Result.Quantity -= quantity;
+
+//              var updateQuantityResult = await _productClient.UpdateProductQuantity(productId, quantity);
+//              if (!updateQuantityResult)
+//              {
+//                  return this.BadRequest("Failed to update product quantity");
+//              }
+//              _context.CartItems.Update(cartItem.Result);
+//          }
+
+//	foundCartWithItems.CartPrice = await CalculateTotalCartPrice(cartId);
+
+//	await _context.SaveChangesAsync();
+
+//	return this.Ok(foundCartWithItems);
+//}

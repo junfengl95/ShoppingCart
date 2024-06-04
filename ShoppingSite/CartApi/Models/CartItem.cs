@@ -13,6 +13,6 @@ public partial class CartItem
     public int Quantity { get; set; }
 
     public int FkCartId { get; set; }
-
+    [JsonIgnore]
     public virtual Cart FkCart { get; set; } = null!;
 }

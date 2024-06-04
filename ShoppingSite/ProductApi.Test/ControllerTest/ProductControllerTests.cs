@@ -3,11 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProductApi.Controllers;
 using ProductApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProductApi.Test.ControllerTest
 {
@@ -108,7 +103,7 @@ namespace ProductApi.Test.ControllerTest
                 ProductRating = 4.0M,
                 ProductDescription = "uniqueProductDescription",
                 ProductCategory = "UniqueCategory",
-                ProductImage = "ShoppingSite\\ProductImages\\Unique.jpg"
+                ProductImage = "/ProductImages/Unique.jpg"
             };
 
             // Act
@@ -151,17 +146,17 @@ namespace ProductApi.Test.ControllerTest
         }
 
         [Fact]
-        public async void ProductController_UpdateProductQuantityFromPurchase_ReturnProduct()
+        public async void ProductController_UpdateProductQuantityFromPurchase_ReturnMoreProduct()
         {
             // Arrange
             var dbContext = await GetDbContextAsync();
             var controller = new ProductController(dbContext);
-            var amount = 5;
+            var quantity = 5;
             var productId = 11;
 
 
             // Act
-            var result = await controller.UpdateProductQuantityFromPurchase(productId, amount);
+            var result = await controller.UpdateProductQuantityFromPurchase(productId, quantity);
 
             // Assert
             result.Should().NotBeNull();
@@ -174,12 +169,44 @@ namespace ProductApi.Test.ControllerTest
 
             var updatedProduct = okResult.Value as Product;
             updatedProduct.Should().NotBeNull();
-            updatedProduct.ProductQuantity.Should().Be(50 + amount);
+            updatedProduct.ProductQuantity.Should().Be(50 + quantity);
 
             // Check for change in Mock db
             var productInDb = await dbContext.Products.FindAsync(productId);
             productInDb.Should().NotBeNull();
-            productInDb.ProductQuantity.Should().Be(50 + amount);
+            productInDb.ProductQuantity.Should().Be(50 + quantity);
+        }
+
+        [Fact]
+        public async void ProductController_UpdateProductQuantityFromPurchase_ReturnLessProduct()
+        {
+            // Arrange
+            var dbContext = await GetDbContextAsync();
+            var controller = new ProductController(dbContext);
+            var quantity = -5;
+            var productId = 1;
+
+
+            // Act
+            var result = await controller.UpdateProductQuantityFromPurchase(productId, quantity);
+
+            // Assert
+            result.Should().NotBeNull();
+
+            var actionResult = result.Result;
+            actionResult.Should().BeOfType<OkObjectResult>();
+
+            var okResult = actionResult as OkObjectResult;
+            okResult.Should().NotBeNull();
+
+            var updatedProduct = okResult.Value as Product;
+            updatedProduct.Should().NotBeNull();
+            updatedProduct.ProductQuantity.Should().Be(50 + quantity);
+
+            // Check for change in Mock db
+            var productInDb = await dbContext.Products.FindAsync(productId);
+            productInDb.Should().NotBeNull();
+            productInDb.ProductQuantity.Should().Be(50 + quantity);
         }
     }
 }

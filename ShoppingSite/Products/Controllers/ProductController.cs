@@ -58,7 +58,7 @@ namespace ProductApi.Controllers
 		}
 
 		[HttpPut]
-		public async Task<ActionResult<Product>> UpdateProductAsync(Product product)
+		public async Task<ActionResult<Product>> UpdateProductDetailsAsync(Product product)
 		{
 			var existingProduct = await _context.Products.FindAsync(product.ProductId);
 			if (ReferenceEquals(existingProduct, null))
@@ -77,17 +77,19 @@ namespace ProductApi.Controllers
 		public async Task<ActionResult<Product>> UpdateProductQuantityFromPurchase(int productId, int quantity)
 		{
 			var existingProduct = await _context.Products.FindAsync(productId);
-			if (ReferenceEquals(existingProduct, null))
+			if (existingProduct == null)
 			{
-				return NotFound();
+				return NotFound("Product not found");
 			}
 
-			if (quantity > existingProduct.ProductQuantity)
-			{
-				return BadRequest("Amount entered exceed Inventory"); // Usually this would never happen just as a security feature
-			}
+			// Update the quantity
+			// If cart removes an Item, it will return a -cartItem.Quantity value which will increases the inventory
+			// If cart adds an Item, it will return a positive cartItem.Quantity value which will reduce inventory 
+            existingProduct.ProductQuantity -= quantity; 
 
-            existingProduct.ProductQuantity += quantity;
+			if (existingProduct.ProductQuantity < 0) { return BadRequest("Insufficient product quantity."); }
+
+			_context.Products.Update(existingProduct);
             await _context.SaveChangesAsync();
             return Ok(existingProduct);
         }
